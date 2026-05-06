@@ -4,118 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automação Anki: Domine o Inglês com Python e IA</title>
-    <meta name="description"
-        content="Tutorial completo sobre como automatizar a criação de cards no Anki usando Python e inteligência artificial.">
+    <title>Tutorial: Automação de Cards no Anki</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap"
-        rel="stylesheet">
-    <style>
-        /* Estilos Críticos para Garantir Visibilidade Imediata */
-        pre {
-            background-color: #0f172a !important;
-            color: #ffffff !important;
-            padding: 1.5rem !important;
-            border-radius: 12px !important;
-            border: 1px solid #334155 !important;
-            display: block !important;
-            margin: 1.5rem 0 !important;
-        }
-        pre code {
-            color: #ffffff !important;
-            background-color: transparent !important;
-            font-family: 'JetBrains Mono', monospace !important;
-        }
-        .subtitle {
-            color: #ffffff !important;
-            opacity: 1 !important;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-    <header>
-        <div class="container">
-            <!-- Substituir pelo caminho real da imagem gerada -->
-            <img src="hero.png" alt="Anki Automation Hero" class="hero-img">
-            <h1>📚 Automação de Cards ANKI</h1>
-            <p class="subtitle">Aprenda a criar centenas de flashcards com áudio e tradução em minutos usando Python e
-                Inteligência Artificial.</p>
-        </div>
-    </header>
-
     <div class="container">
-        <nav class="toc">
-            <h2>Conteúdo do Tutorial</h2>
+        <header>
+            <h1>Automação de Estudos com Anki</h1>
+            <p class="subtitle">Como criar centenas de cards personalizados em segundos usando Python e IA</p>
+        </header>
+
+        <nav>
             <ul>
-                <li><a href="#introducao">1. O que é este tutorial?</a></li>
-                <li><a href="#python">2. Instalação do Python</a></li>
-                <li><a href="#ankiconnect">3. Anki Connect</a></li>
-                <li><a href="#dependencias">4. Dependências</a></li>
-                <li><a href="#script">5. O Script de Automação</a></li>
-                <li><a href="#prompt">6. O Prompt de IA</a></li>
-                <li><a href="#uso">7. Como Usar</a></li>
-                <li><a href="#solucao">8. Solução de Problemas</a></li>
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#requisitos">Requisitos</a></li>
+                <li><a href="#anki-connect">Anki Connect</a></li>
+                <li><a href="#dependencias">Dependências</a></li>
+                <li><a href="#script">O Script</a></li>
+                <li><a href="#prompt">O Prompt de IA</a></li>
+                <li><a href="#uso">Como Usar</a></li>
+                <li><a href="#solucao">Solução de Problemas</a></li>
             </ul>
         </nav>
 
         <main>
             <section id="introducao">
-                <h2>1. O que é este tutorial?</h2>
-                <p>Este guia definitivo ensina você a <strong>automatizar a criação de cards no ANKI</strong> em lote.
-                    Chega de copiar e colar manualmente palavra por palavra!</p>
-                <div class="step-item">
-                    <div class="step-number">✓</div>
-                    <div>
-                        <strong>Produtividade Máxima:</strong> Cole uma lista com 10 palavras e 50 frases de uma vez.
-                        Selecione a melhor frase com um clique e gere áudios automáticos com Google TTS.
-                    </div>
-                </div>
+                <h2>1. Introdução</h2>
+                <p>Este tutorial explica como configurar uma ferramenta de automação que extrai palavras, explicações e
+                    frases de exemplo geradas por IA diretamente para o seu Anki, com áudio automático.</p>
             </section>
 
-            <section id="python">
-                <h2>2. Instalação do Python</h2>
-                <p>O Python é o motor que roda nossa automação. Para instalá-lo no Windows:</p>
-                <ol class="step-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div>
-                            <strong>Microsoft Store:</strong> Abra a loja, procure por "Python 3.12" e clique em
-                            instalar. É o método mais simples e seguro.
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div>
-                            <strong>Site Oficial:</strong> Acesse python.org, baixe o instalador e <strong>não
-                                esqueça</strong> de marcar a opção "Add Python to PATH" na primeira tela.
-                        </div>
-                    </li>
+            <section id="requisitos">
+                <h2>2. Requisitos Prévios</h2>
+                <ul class="checklist">
+                    <li><input type="checkbox" checked disabled> Python instalado no computador</li>
+                    <li><input type="checkbox" checked disabled> Anki (versão desktop) instalado</li>
+                    <li><input type="checkbox" checked disabled> Conta no DeepSeek ou ChatGPT</li>
+                </ul>
+            </section>
+
+            <section id="anki-connect">
+                <h2>3. Configurando o Anki Connect</h2>
+                <p>Para o Python conversar com o Anki, você precisa do addon <strong>AnkiConnect</strong>.</p>
+                <ol>
+                    <li>No Anki, vá em <code>Ferramentas -> Complementos</code>.</li>
+                    <li>Clique em <code>Obter Complementos</code> e cole o código: <code>2055492159</code>.</li>
+                    <li>Reinicie o Anki.</li>
                 </ol>
             </section>
 
-            <section id="ankiconnect">
-                <h2>3. Instalação do Anki Connect</h2>
-                <p>O Anki Connect permite que o nosso script converse com o seu Anki. Siga os passos:</p>
-                <div class="step-item">
-                    <div>
-                        1. No Anki, vá em <code>Ferramentas > Complementos > Obter Complementos</code>.<br>
-                        2. Digite o código: <strong>2055492159</strong><br>
-                        3. Reinicie o Anki.
-                    </div>
-                </div>
-                <p>Para verificar se está funcionando, acesse <code>http://localhost:8765</code> no seu navegador. Você
-                    deve ver uma mensagem do AnkiConnect.</p>
-            </section>
-
             <section id="dependencias">
-                <h2>4. Instalação das Dependências</h2>
-                <p>Abra o Prompt de Comando (CMD) e execute o comando abaixo para instalar as bibliotecas necessárias:
-                </p>
+                <h2>4. Instalando Dependências</h2>
+                <p>Abra o seu terminal (CMD ou PowerShell no Windows) e execute:</p>
                 <div class="code-container">
                     <button class="copy-btn">Copiar</button>
                     <pre><code>pip install requests gtts</code></pre>
@@ -129,7 +71,7 @@
                 <div class="code-container">
                     <button class="copy-btn">Copiar Código</button>
                     <pre><code>import tkinter as tk
-from tkinter import ttk, scrolledtext, messagebox
+from tkinter import ttk, scrolledtext, messagebox, simpledialog, Toplevel
 import re
 import requests
 import os
@@ -145,9 +87,10 @@ COLORS = {
     'primary_light': '#7f8cfa',
     'secondary': '#718096',
     'success': '#48bb78',
-    'success_light': '#a8e6cf',
+    'success_light': '#a8e6cf',  # Verde claro
     'warning': '#ed8936',
     'danger': '#f56565',
+    'danger_light': '#fed7d7',   # Vermelho claro para texto
     'light': '#ffffff',
     'light_gray': '#f7fafc',
     'dark': '#2d3748',
@@ -175,7 +118,7 @@ class AnkiApp:
     def _setup_mousewheel(self):
         def _on_mousewheel(event):
             self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-        self.root.bind_all("&lt;MouseWheel&gt;", _on_mousewheel)
+        self.root.bind_all("<MouseWheel>", _on_mousewheel)
         
     def setup_ui(self):
         main_frame = tk.Frame(self.root, bg=COLORS['bg'])
@@ -215,7 +158,7 @@ class AnkiApp:
                                                       bg=COLORS['light_gray'])
         self.texto_input.pack(fill=tk.X, padx=15, pady=(0, 10))
         
-        # Botoes superiores
+        # Botoes superiores - REDUZIDOS
         btn_frame = tk.Frame(main_frame, bg=COLORS['bg'])
         btn_frame.grid(row=2, column=0, sticky="ew", pady=(0, 15))
         
@@ -248,7 +191,7 @@ class AnkiApp:
                                      font=("Segoe UI", 9))
         self.status_label.pack(side=tk.RIGHT, padx=10)
         
-        # Area de selecao
+        # Area de selecao - ALTURA AUMENTADA
         palavras_frame = tk.Frame(main_frame, bg=COLORS['light'], relief=tk.GROOVE, bd=1)
         palavras_frame.grid(row=3, column=0, sticky="nsew", pady=(0, 10))
         palavras_frame.grid_rowconfigure(1, weight=1)
@@ -272,7 +215,7 @@ class AnkiApp:
         self.scrollbar = ttk.Scrollbar(canvas_container, orient="vertical", command=self.canvas.yview)
         self.scrollable_frame = tk.Frame(self.canvas, bg=COLORS['light_gray'])
         
-        self.scrollable_frame.bind("&lt;Configure&gt;", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
         
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw", width=self.canvas.winfo_width())
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
@@ -282,9 +225,9 @@ class AnkiApp:
         
         def _configure_canvas(event):
             self.canvas.itemconfig(1, width=event.width)
-        self.canvas.bind("&lt;Configure&gt;", _configure_canvas)
+        self.canvas.bind("<Configure>", _configure_canvas)
         
-        # Botao criar cards
+        # Botao criar cards - METADE DO TAMANHO, VERDE CLARO FUNDO, TEXTO VERMELHO
         bottom_frame = tk.Frame(main_frame, bg=COLORS['bg'])
         bottom_frame.grid(row=4, column=0, sticky="ew", pady=8)
         
@@ -307,65 +250,46 @@ class AnkiApp:
         linhas = texto.split('\n')
         i = 0
         
-        while i &lt; len(linhas):
+        while i < len(linhas):
             linha = linhas[i].strip()
             
-            if linha.startswith('###') or (linha.startswith('**') and not linha.startswith('**Explicação')):
-                palavra_match = re.search(r'\*\*([^*]+)\*\*', linha)
+            # Uma palavra começa com ### ou **palavra** (sem dois pontos no final para não confundir com metadados)
+            if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
+                palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
                 if palavra_match:
-                    palavra = palavra_match.group(1).strip().lower()
+                    palavra = (palavra_match.group(1) or palavra_match.group(2)).strip()
+                    palavra = re.sub(r'^\d+\.\s*', '', palavra)
                     i += 1
                     
-                    while i &lt; len(linhas) and not linhas[i].strip():
-                        i += 1
-                    
                     explicacao = ""
-                    if i &lt; len(linhas) and 'Explicação:' in linhas[i]:
-                        explicacao = linhas[i].replace('Explicação:', '').replace('**', '').strip()
-                        explicacao = re.sub(r'\*\*([^*]+)\*\*', r'\1', explicacao)
-                        i += 1
-                    
-                    while i &lt; len(linhas) and not linhas[i].strip():
-                        i += 1
-                    
                     pronuncia = ""
-                    if i &lt; len(linhas) and 'Pronúncia:' in linhas[i]:
-                        pronuncia = linhas[i].replace('Pronúncia:', '').replace('**', '').strip()
-                        pronuncia = re.sub(r'\*\*([^*]+)\*\*', r'\1', pronuncia)
-                        i += 1
-                    
-                    while i &lt; len(linhas) and not linhas[i].strip():
-                        i += 1
-                    
                     traducao = ""
-                    if i &lt; len(linhas) and 'Tradução:' in linhas[i]:
-                        traducao = linhas[i].replace('Tradução:', '').replace('**', '').strip()
-                        traducao = re.sub(r'\*\*([^*]+)\*\*', r'\1', traducao)
-                        i += 1
-                    
                     frases = []
-                    while i &lt; len(linhas):
-                        linha_atual = linhas[i].strip()
+                    
+                    # Captura metadados e frases até a próxima palavra ou fim do texto
+                    while i < len(linhas):
+                        sub_linha = linhas[i].strip()
                         
-                        if linha_atual.startswith('###') or (linha_atual.startswith('**') and 'Explicação' not in linha_atual):
+                        # Se encontrar o início de outra palavra, interrompe a busca para este bloco
+                        if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
                             break
                         
-                        if '|' in linha_atual and not linha_atual.startswith('|--') and not 'Frase em inglês' in linha_atual and not '---' in linha_atual:
-                            partes = linha_atual.split('|')
-                            if len(partes) &gt;= 3:
-                                frase_en = partes[1].strip().replace('**', '').strip()
-                                frase_pt = partes[2].strip().replace('**', '').strip()
-                                frase_en = re.sub(r'\*\*([^*]+)\*\*', r'\1', frase_en)
-                                frase_pt = re.sub(r'\*\*([^*]+)\*\*', r'\1', frase_pt)
-                                
+                        # Captura metadados
+                        if 'Explicação:' in sub_linha:
+                            explicacao = sub_linha.split('Explicação:')[1].replace('**', '').strip()
+                        elif 'Pronúncia:' in sub_linha:
+                            pronuncia = sub_linha.split('Pronúncia:')[1].replace('**', '').strip()
+                        elif 'Tradução:' in sub_linha:
+                            traducao = sub_linha.split('Tradução:')[1].replace('**', '').strip()
+                        
+                        # Captura frases da tabela
+                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglês']):
+                            partes = sub_linha.split('|')
+                            if len(partes) >= 3:
+                                frase_en = partes[1].replace('**', '').strip()
+                                frase_pt = partes[2].replace('**', '').strip()
                                 if frase_en and frase_pt:
-                                    # Destacar a palavra na frase
-                                    frase_destacada = re.sub(rf'\b({re.escape(palavra)})\b', r'**\1**', frase_en, flags=re.IGNORECASE)
-                                    frases.append({
-                                        'en': frase_en, 
-                                        'pt': frase_pt,
-                                        'en_destacada': frase_destacada
-                                    })
+                                    frases.append({'en': frase_en, 'pt': frase_pt})
                         
                         i += 1
                     
@@ -385,31 +309,36 @@ class AnkiApp:
         return dados
     
     def excluir_palavra(self, index):
+        """Remove uma palavra e suas frases da lista"""
         if messagebox.askyesno("Confirmar Exclusão", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
             self.dados.pop(index)
+            # Reorganizar selecoes
             novas_selecoes = {}
             for i, var in enumerate(self.selecoes.values()):
-                if i &lt; index:
+                if i < index:
                     novas_selecoes[i] = var
-                elif i &gt; index:
+                elif i > index:
                     novas_selecoes[i-1] = var
             self.selecoes = novas_selecoes
             self.mostrar_opcoes()
             self.status_label.config(text=f"Palavra excluída. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
     
     def editar_palavra(self, index):
+        """Abre janela para editar palavra, explicacao, pronuncia, traducao e frases"""
         item = self.dados[index]
         
+        # Criar janela de edicao
         edit_window = Toplevel(self.root)
         edit_window.title(f"Editando: {item['palavra']}")
         edit_window.geometry("800x700")
         edit_window.configure(bg=COLORS['bg'])
         
+        # Frame com scroll
         canvas = tk.Canvas(edit_window, bg=COLORS['bg'], highlightthickness=0)
         scrollbar = ttk.Scrollbar(edit_window, orient="vertical", command=canvas.yview)
         scrollable_frame = tk.Frame(canvas, bg=COLORS['bg'])
         
-        scrollable_frame.bind("&lt;Configure&gt;", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
         
         canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -419,30 +348,35 @@ class AnkiApp:
         
         row = 0
         
+        # Palavra
         tk.Label(scrollable_frame, text="Palavra:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         palavra_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         palavra_entry.insert(0, item['palavra'])
         palavra_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
+        # Explicacao
         tk.Label(scrollable_frame, text="Explicação:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
         explicacao_text = tk.Text(scrollable_frame, font=("Segoe UI", 10), width=60, height=4, wrap=tk.WORD)
         explicacao_text.insert("1.0", item['explicacao'])
         explicacao_text.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
+        # Pronuncia
         tk.Label(scrollable_frame, text="Pronúncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         pronuncia_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         pronuncia_entry.insert(0, item['pronuncia'])
         pronuncia_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
+        # Traducao
         tk.Label(scrollable_frame, text="Tradução:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         traducao_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         traducao_entry.insert(0, item['traducao'])
         traducao_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
+        # Frases
         tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglês | tradução):", 
                 font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, columnspan=2, sticky=tk.W, padx=10, pady=5)
         row += 1
@@ -453,29 +387,26 @@ class AnkiApp:
         frases_text.grid(row=row, column=0, columnspan=2, padx=10, pady=5)
         row += 1
         
+        # Botoes
         btn_frame = tk.Frame(scrollable_frame, bg=COLORS['bg'])
         btn_frame.grid(row=row, column=0, columnspan=2, pady=15)
         
         def salvar_edicao():
-            nova_palavra = palavra_entry.get().strip().lower()
+            nova_palavra = palavra_entry.get().strip()
             nova_explicacao = explicacao_text.get("1.0", tk.END).strip()
             nova_pronuncia = pronuncia_entry.get().strip()
             nova_traducao = traducao_entry.get().strip()
             
+            # Processar frases
             novas_frases = []
             for linha in frases_text.get("1.0", tk.END).strip().split('\n'):
                 if '|' in linha:
                     partes = linha.split('|')
-                    if len(partes) &gt;= 2:
+                    if len(partes) >= 2:
                         en = partes[0].strip()
                         pt = partes[1].strip()
                         if en and pt:
-                            frase_destacada = re.sub(rf'\b({re.escape(nova_palavra)})\b', r'**\1**', en, flags=re.IGNORECASE)
-                            novas_frases.append({
-                                'en': en,
-                                'pt': pt,
-                                'en_destacada': frase_destacada
-                            })
+                            novas_frases.append({'en': en, 'pt': pt})
             
             if not nova_palavra:
                 messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
@@ -485,6 +416,7 @@ class AnkiApp:
                 messagebox.showwarning("Aviso", "Pelo menos uma frase é obrigatória!")
                 return
             
+            # Atualizar dados
             self.dados[index] = {
                 'palavra': nova_palavra,
                 'explicacao': nova_explicacao,
@@ -493,6 +425,7 @@ class AnkiApp:
                 'frases': novas_frases
             }
             
+            # Atualizar selecao
             var = tk.IntVar()
             var.set(0)
             self.selecoes[index] = var
@@ -532,7 +465,6 @@ class AnkiApp:
         self.status_label.config(text=f"{len(self.dados)} palavras encontradas. Selecione 1 frase para cada.", fg=COLORS['success'])
     
     def mostrar_opcoes(self):
-        """Exibe apenas a palavra e as frases com destaque"""
         for widget in self.scrollable_frame.winfo_children():
             widget.destroy()
         
@@ -541,18 +473,20 @@ class AnkiApp:
             card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
             card.pack(fill=tk.X, pady=8, padx=5)
             
-            # Cabeçalho com a palavra e botoes
+            # Cabeçalho com botoes de acao
             header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
             header.pack(fill=tk.X)
             header.pack_propagate(False)
             
+            # Titulo a esquerda
             palavra_label = tk.Label(header, 
-                                     text=f"{i+1}. {item['palavra']}", 
+                                     text=item['palavra'].title(), 
                                      font=("Segoe UI", 14, "bold"),
                                      bg=COLORS['header_bg'],
                                      fg=COLORS['primary'])
             palavra_label.pack(side=tk.LEFT, padx=15, pady=10)
             
+            # Botoes de editar e excluir a direita
             btn_excluir = tk.Button(header, 
                                     text="🗑️ Excluir", 
                                     bg=COLORS['danger'],
@@ -573,15 +507,53 @@ class AnkiApp:
                                    command=lambda idx=i: self.editar_palavra(idx))
             btn_editar.pack(side=tk.RIGHT, padx=5)
             
-            # Frases
-            frases_frame = tk.Frame(card, bg=COLORS['card_bg'])
-            frases_frame.pack(fill=tk.X, padx=15, pady=10)
+            # Informacoes
+            info_frame = tk.Frame(card, bg=COLORS['card_bg'])
+            info_frame.pack(fill=tk.X, padx=15, pady=10)
             
-            tk.Label(frases_frame,
+            if item['explicacao'].strip():
+                tk.Label(info_frame, 
+                        text="EXPLICAÇÃO:",
+                        bg=COLORS['card_bg'],
+                        fg=COLORS['secondary'],
+                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
+                
+                explicacao_label = tk.Label(info_frame,
+                                            text=item['explicacao'][:150] + "..." if len(item['explicacao']) > 150 else item['explicacao'],
+                                            bg=COLORS['light_gray'],
+                                            fg=COLORS['dark'],
+                                            font=("Segoe UI", 9),
+                                            wraplength=1000,
+                                            justify=tk.LEFT,
+                                            padx=8,
+                                            pady=5,
+                                            relief=tk.FLAT)
+                explicacao_label.pack(fill=tk.X, pady=(0, 8))
+            
+            if item['traducao'].strip():
+                tk.Label(info_frame,
+                        text=f"{item['palavra'].upper()}:",
+                        bg=COLORS['card_bg'],
+                        fg=COLORS['secondary'],
+                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
+                
+                traducao_label = tk.Label(info_frame,
+                                          text=item['traducao'],
+                                          bg=COLORS['light_gray'],
+                                          fg=COLORS['dark'],
+                                          font=("Segoe UI", 9),
+                                          wraplength=1000,
+                                          justify=tk.LEFT,
+                                          padx=8,
+                                          pady=5,
+                                          relief=tk.FLAT)
+                traducao_label.pack(fill=tk.X, pady=(0, 8))
+            
+            tk.Label(info_frame,
                     text="SELECIONE UMA FRASE:",
                     bg=COLORS['card_bg'],
                     fg=COLORS['success'],
-                    font=("Segoe UI", 10, "bold")).pack(anchor=tk.W, pady=(0, 8))
+                    font=("Segoe UI", 10, "bold")).pack(anchor=tk.W, pady=(8, 5))
             
             var = tk.IntVar()
             self.selecoes[i] = var
@@ -599,53 +571,23 @@ class AnkiApp:
                                     font=("Segoe UI", 10))
                 rb.pack(side=tk.LEFT, padx=8)
                 
-                # Criar um Text widget para mostrar a frase com a palavra em negrito
-                frase_widget = tk.Text(frase_frame, 
-                                       bg=frase_frame.cget('bg'),
-                                       font=("Segoe UI", 10),
-                                       wrap=tk.WORD,
-                                       height=2,
-                                       borderwidth=0,
-                                       highlightthickness=0,
-                                       padx=5,
-                                       pady=5)
+                frase_text = tk.Label(frase_frame,
+                                      text=frase['en'],
+                                      bg=frase_frame.cget('bg'),
+                                      fg=COLORS['dark'],
+                                      wraplength=900,
+                                      justify=tk.LEFT,
+                                      font=("Segoe UI", 10))
+                frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
                 
-                # Configurar tags para negrito
-                frase_widget.tag_configure("bold", font=("Segoe UI", 10, "bold"), foreground=COLORS['primary'])
-                frase_widget.tag_configure("normal", font=("Segoe UI", 10))
-                
-                # Usar a versão com destaque
-                texto_frase = frase.get('en_destacada', frase['en'])
-                
-                # Processar o texto para encontrar partes entre ** **
-                pos = 0
-                while True:
-                    match = re.search(r'\*\*([^*]+)\*\*', texto_frase)
-                    if not match:
-                        if pos &lt; len(texto_frase):
-                            frase_widget.insert(tk.END, texto_frase[pos:], "normal")
-                        break
-                    
-                    # Texto antes do negrito
-                    if match.start() &gt; pos:
-                        frase_widget.insert(tk.END, texto_frase[pos:match.start()], "normal")
-                    
-                    # Texto em negrito
-                    frase_widget.insert(tk.END, match.group(1), "bold")
-                    pos = match.end()
-                
-                frase_widget.config(state="disabled")
-                frase_widget.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5, padx=(0, 10))
-                
-                # Traducao da frase
                 traducao_frase = tk.Label(frase_frame,
                                          text=f"→ {frase['pt']}",
                                          bg=frase_frame.cget('bg'),
                                          fg=COLORS['secondary'],
-                                         wraplength=300,
+                                         wraplength=900,
                                          justify=tk.LEFT,
                                          font=("Segoe UI", 9))
-                traducao_frase.pack(side=tk.RIGHT, padx=5, pady=5)
+                traducao_frase.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=2)
             
             if item['frases']:
                 var.set(0)
@@ -664,7 +606,7 @@ class AnkiApp:
     
     def gerar_audio(self, texto, palavra):
         try:
-            nome_limpo = re.sub(r'[\\/*?:"&lt;&gt;|]', "", palavra)
+            nome_limpo = re.sub(r'[\\/*?:"<>|]', "", palavra)
             timestamp = int(time.time() * 1000)
             nome_arquivo = f"google-{timestamp}-{nome_limpo}.mp3"
             
