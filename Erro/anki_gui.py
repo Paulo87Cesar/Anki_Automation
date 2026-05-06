@@ -1,136 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automação Anki: Domine o Inglês com Python e IA</title>
-    <meta name="description"
-        content="Tutorial completo sobre como automatizar a criação de cards no Anki usando Python e inteligência artificial.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap"
-        rel="stylesheet">
-    <style>
-        /* Estilos Críticos para Garantir Visibilidade Imediata */
-        pre {
-            background-color: #0f172a !important;
-            color: #ffffff !important;
-            padding: 1.5rem !important;
-            border-radius: 12px !important;
-            border: 1px solid #334155 !important;
-            display: block !important;
-            margin: 1.5rem 0 !important;
-        }
-
-        pre code {
-            color: #ffffff !important;
-            background-color: transparent !important;
-            font-family: 'JetBrains Mono', monospace !important;
-        }
-
-        .subtitle {
-            color: #ffffff !important;
-            opacity: 1 !important;
-        }
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <div class="container">
-            <!-- Substituir pelo caminho real da imagem gerada -->
-            <img src="hero.png" alt="Anki Automation Hero" class="hero-img">
-            <h1>📚 Automação de Cards ANKI</h1>
-            <p class="subtitle">Aprenda a criar centenas de flashcards com áudio e tradução em minutos usando Python e
-                Inteligência Artificial.</p>
-        </div>
-    </header>
-
-    <div class="container">
-        <nav class="toc">
-            <h2>Conteúdo do Tutorial</h2>
-            <ul>
-                <li><a href="#introducao">1. O que é este tutorial?</a></li>
-                <li><a href="#python">2. Instalação do Python</a></li>
-                <li><a href="#ankiconnect">3. Anki Connect</a></li>
-                <li><a href="#dependencias">4. Dependências</a></li>
-                <li><a href="#script">5. O Script de Automação</a></li>
-                <li><a href="#prompt">6. O Prompt de IA</a></li>
-                <li><a href="#uso">7. Como Usar</a></li>
-                <li><a href="#solucao">8. Solução de Problemas</a></li>
-            </ul>
-        </nav>
-
-        <main>
-            <section id="introducao">
-                <h2>1. O que é este tutorial?</h2>
-                <p>Este guia definitivo ensina você a <strong>automatizar a criação de cards no ANKI</strong> em lote.
-                    Chega de copiar e colar manualmente palavra por palavra!</p>
-                <div class="step-item">
-                    <div class="step-number">✓</div>
-                    <div>
-                        <strong>Produtividade Máxima:</strong> Cole uma lista com 10 palavras e 50 frases de uma vez.
-                        Selecione a melhor frase com um clique e gere áudios automáticos com Google TTS.
-                    </div>
-                </div>
-            </section>
-
-            <section id="python">
-                <h2>2. Instalação do Python</h2>
-                <p>O Python é o motor que roda nossa automação. Para instalá-lo no Windows:</p>
-                <ol class="step-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div>
-                            <strong>Microsoft Store:</strong> Abra a loja, procure por "Python 3.12" e clique em
-                            instalar. É o método mais simples e seguro.
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div>
-                            <strong>Site Oficial:</strong> Acesse python.org, baixe o instalador e <strong>não
-                                esqueça</strong> de marcar a opção "Add Python to PATH" na primeira tela.
-                        </div>
-                    </li>
-                </ol>
-            </section>
-
-            <section id="ankiconnect">
-                <h2>3. Instalação do Anki Connect</h2>
-                <p>O Anki Connect permite que o nosso script converse com o seu Anki. Siga os passos:</p>
-                <div class="step-item">
-                    <div>
-                        1. No Anki, vá em <code>Ferramentas > Complementos > Obter Complementos</code>.<br>
-                        2. Digite o código: <strong>2055492159</strong><br>
-                        3. Reinicie o Anki.
-                    </div>
-                </div>
-                <p>Para verificar se está funcionando, acesse <code>http://localhost:8765</code> no seu navegador. Você
-                    deve ver uma mensagem do AnkiConnect.</p>
-            </section>
-
-            <section id="dependencias">
-                <h2>4. Instalação das Dependências</h2>
-                <p>Abra o Prompt de Comando (CMD) e execute o comando abaixo para instalar as bibliotecas necessárias:
-                </p>
-                <div class="code-container">
-                    <button class="copy-btn">Copiar</button>
-                    <pre><code>pip install requests gtts</code></pre>
-                </div>
-            </section>
-
-            <section id="script">
-                <h2>5. O Script de Automação</h2>
-                <p>Este é o coração do projeto. Salve o código abaixo em um arquivo chamado <code>anki_gui.py</code>
-                    dentro de uma pasta dedicada.</p>
-                <div class="code-container">
-                    <button class="copy-btn">Copiar Código</button>
-                    <pre><code>import tkinter as tk
+import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, simpledialog, Toplevel
 import re
 import requests
@@ -178,7 +46,7 @@ class AnkiApp:
     def _setup_mousewheel(self):
         def _on_mousewheel(event):
             self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-        self.root.bind_all("&lt;MouseWheel&gt;", _on_mousewheel)
+        self.root.bind_all("<MouseWheel>", _on_mousewheel)
         
     def setup_ui(self):
         main_frame = tk.Frame(self.root, bg=COLORS['bg'])
@@ -275,7 +143,7 @@ class AnkiApp:
         self.scrollbar = ttk.Scrollbar(canvas_container, orient="vertical", command=self.canvas.yview)
         self.scrollable_frame = tk.Frame(self.canvas, bg=COLORS['light_gray'])
         
-        self.scrollable_frame.bind("&lt;Configure&gt;", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
         
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw", width=self.canvas.winfo_width())
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
@@ -285,7 +153,7 @@ class AnkiApp:
         
         def _configure_canvas(event):
             self.canvas.itemconfig(1, width=event.width)
-        self.canvas.bind("&lt;Configure&gt;", _configure_canvas)
+        self.canvas.bind("<Configure>", _configure_canvas)
         
         # Botao criar cards - METADE DO TAMANHO, VERDE CLARO FUNDO, TEXTO VERMELHO
         bottom_frame = tk.Frame(main_frame, bg=COLORS['bg'])
@@ -310,11 +178,11 @@ class AnkiApp:
         linhas = texto.split('\n')
         i = 0
         
-        while i &lt; len(linhas):
+        while i < len(linhas):
             linha = linhas[i].strip()
             
             # Uma palavra começa com ### ou **palavra** (sem dois pontos no final para não confundir com metadados)
-            if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) &gt; 4):
+            if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
                 palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
                 if palavra_match:
                     palavra = (palavra_match.group(1) or palavra_match.group(2)).strip()
@@ -327,11 +195,11 @@ class AnkiApp:
                     frases = []
                     
                     # Captura metadados e frases até a próxima palavra ou fim do texto
-                    while i &lt; len(linhas):
+                    while i < len(linhas):
                         sub_linha = linhas[i].strip()
                         
                         # Se encontrar o início de outra palavra, interrompe a busca para este bloco
-                        if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) &gt; 4):
+                        if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
                             break
                         
                         # Captura metadados
@@ -345,7 +213,7 @@ class AnkiApp:
                         # Captura frases da tabela
                         if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglês']):
                             partes = sub_linha.split('|')
-                            if len(partes) &gt;= 3:
+                            if len(partes) >= 3:
                                 frase_en = partes[1].replace('**', '').strip()
                                 frase_pt = partes[2].replace('**', '').strip()
                                 if frase_en and frase_pt:
@@ -375,9 +243,9 @@ class AnkiApp:
             # Reorganizar selecoes
             novas_selecoes = {}
             for i, var in enumerate(self.selecoes.values()):
-                if i &lt; index:
+                if i < index:
                     novas_selecoes[i] = var
-                elif i &gt; index:
+                elif i > index:
                     novas_selecoes[i-1] = var
             self.selecoes = novas_selecoes
             self.mostrar_opcoes()
@@ -398,7 +266,7 @@ class AnkiApp:
         scrollbar = ttk.Scrollbar(edit_window, orient="vertical", command=canvas.yview)
         scrollable_frame = tk.Frame(canvas, bg=COLORS['bg'])
         
-        scrollable_frame.bind("&lt;Configure&gt;", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
         
         canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
         canvas.configure(yscrollcommand=scrollbar.set)
@@ -462,7 +330,7 @@ class AnkiApp:
             for linha in frases_text.get("1.0", tk.END).strip().split('\n'):
                 if '|' in linha:
                     partes = linha.split('|')
-                    if len(partes) &gt;= 2:
+                    if len(partes) >= 2:
                         en = partes[0].strip()
                         pt = partes[1].strip()
                         if en and pt:
@@ -579,7 +447,7 @@ class AnkiApp:
                         font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
                 
                 explicacao_label = tk.Label(info_frame,
-                                            text=item['explicacao'][:150] + "..." if len(item['explicacao']) &gt; 150 else item['explicacao'],
+                                            text=item['explicacao'][:150] + "..." if len(item['explicacao']) > 150 else item['explicacao'],
                                             bg=COLORS['light_gray'],
                                             fg=COLORS['dark'],
                                             font=("Segoe UI", 9),
@@ -666,7 +534,7 @@ class AnkiApp:
     
     def gerar_audio(self, texto, palavra):
         try:
-            nome_limpo = re.sub(r'[\\/*?:"&lt;&gt;|]', "", palavra)
+            nome_limpo = re.sub(r'[\\/*?:"<>|]', "", palavra)
             timestamp = int(time.time() * 1000)
             nome_arquivo = f"google-{timestamp}-{nome_limpo}.mp3"
             
@@ -823,107 +691,4 @@ def main():
     root.mainloop()
 
 if __name__ == "__main__":
-    main()</code></pre></div>
-            </section>
-
-            <section id="prompt">
-                <h2>6. O Prompt de IA</h2>
-                <p>Antes de usar o programa, você precisa ter sua lista de palavras com 5 frases cada. Você pode usar o <strong>DeepSeek</strong> (ou qualquer outro assistente de IA) para gerar essa lista automaticamente.</p>
-                
-                <h3>Prompt para copiar e colar:</h3>
-                <div class="code-container">
-                    <button class="copy-btn">Copiar Prompt</button>
-                    <pre><code>Aja como um especialista em Tradução e Ensino de Idiomas para alunos de nível pré-intermediário que preferem um estilo descontraído e informal. Sua tarefa é fornecer as informações para cada palavra da lista a seguir, seguindo estas etapas:
-
-Lista do dia:
-
-dating
-went down
-hunted
-spectacularly
-fashion
-beating up
-detached
-detail
-overseas
-threats
-motion
-clockwise
-
-Instruções:
-Para cada palavra, siga as etapas detalhadas abaixo:
-Explicação: Dê uma explicação de 3 a 5 linhas sobre a tradução de inglês para português. As explicações devem ser descontraídas, como se estivesse explicando para um amigo.
-Pronúncia: Forneça a palavra destacada em negrito com sua pronúncia fonética padrão em inglês (IPA), seguida de uma pronúncia fonética "amigável" (mais fácil de ler para brasileiros), aproximando-se do português, mantenha tudo em letra minuscula.
-Tradução: Forneça a tradução da palavra de inglês para português, use como referência o site Reverso https://www.reverso.net/tradu%C3%A7%C3%A3o-texto 
-Exemplos de frases: Forneça 5 exemplos de frases em inglês, relacionadas ao cotidiano, que tenham entre 70 e 100 caracteres. As frases devem destacar a palavra em negrito.
-Tradução das frases: Traduza as 5 frases de inglês para o português, em um estilo informal, destacando a palavra principal em negrito.
-Formato esperado: As frases e suas traduções devem vir em formato de tabela, com a frase em inglês na primeira coluna e a tradução em português na segunda coluna.</code></pre>
-                </div>
-            </section>
-
-            <section id="uso">
-                <h2>7. Como Usar o Programa</h2>
-                <ol class="step-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div><strong>Gere a lista:</strong> Use o prompt acima com suas palavras do dia no
-                            <strong>DeepSeek</strong>. Lembre-se de usar o botão de copiar do próprio chat.</div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div><strong>Inicie o Script:</strong> No terminal, navegue até a pasta e rode
-                            <code>python anki_gui.py</code>.
-                        </div>
-                    </li>
-                    <li class="step-item">
-                        <div class="step-number">3</div>
-                        <div><strong>Processe e Crie:</strong> Cole o texto, clique em Processar, escolha as frases e
-                            finalize em "Criar Cards".</div>
-                    </li>
-                </ol>
-            </section>
-
-            <section id="solucao">
-                <h2>8. Solução de Problemas</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Problema</th>
-                            <th>Solução</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Python não reconhecido</td>
-                            <td>Reinstale marcando "Add to PATH"</td>
-                        </tr>
-                        <tr>
-                            <td>Anki Connect não responde</td>
-                            <td>Verifique se o Anki está aberto</td>
-                        </tr>
-                        <tr>
-                            <td>Erro de Áudio</td>
-                            <td>Verifique a conexão com a internet</td>
-                        </tr>
-                        <tr>
-                            <td>O script não encontra dados</td>
-                            <td>Certifique-se de usar o <strong>DeepSeek</strong> com o botão de copiar do chat</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Tutorial de Automação Anki. Criado para estudantes de idiomas de alta performance.</p>
-            <p><a href="#">Voltar ao topo</a></p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
-</html>
-
+    main()
