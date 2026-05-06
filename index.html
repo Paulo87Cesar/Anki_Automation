@@ -24,11 +24,13 @@
             display: block !important;
             margin: 1.5rem 0 !important;
         }
+
         pre code {
             color: #ffffff !important;
             background-color: transparent !important;
             font-family: 'JetBrains Mono', monospace !important;
         }
+
         .subtitle {
             color: #ffffff !important;
             opacity: 1 !important;
@@ -311,7 +313,7 @@ class AnkiApp:
         while i < len(linhas):
             linha = linhas[i].strip()
             
-            # Uma palavra começa com ### ou **palavra** (sem dois pontos no final para não confundir com metadados)
+            # Uma palavra comeÃ§a com ### ou **palavra** (sem dois pontos no final para nÃ£o confundir com metadados)
             if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
                 palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
                 if palavra_match:
@@ -324,24 +326,24 @@ class AnkiApp:
                     traducao = ""
                     frases = []
                     
-                    # Captura metadados e frases até a próxima palavra ou fim do texto
+                    # Captura metadados e frases atÃ© a prÃ³xima palavra ou fim do texto
                     while i < len(linhas):
                         sub_linha = linhas[i].strip()
                         
-                        # Se encontrar o início de outra palavra, interrompe a busca para este bloco
+                        # Se encontrar o inÃ­cio de outra palavra, interrompe a busca para este bloco
                         if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
                             break
                         
                         # Captura metadados
-                        if 'Explicação:' in sub_linha:
-                            explicacao = sub_linha.split('Explicação:')[1].replace('**', '').strip()
-                        elif 'Pronúncia:' in sub_linha:
-                            pronuncia = sub_linha.split('Pronúncia:')[1].replace('**', '').strip()
-                        elif 'Tradução:' in sub_linha:
-                            traducao = sub_linha.split('Tradução:')[1].replace('**', '').strip()
+                        if 'ExplicaÃ§Ã£o:' in sub_linha:
+                            explicacao = sub_linha.split('ExplicaÃ§Ã£o:')[1].replace('**', '').strip()
+                        elif 'PronÃºncia:' in sub_linha:
+                            pronuncia = sub_linha.split('PronÃºncia:')[1].replace('**', '').strip()
+                        elif 'TraduÃ§Ã£o:' in sub_linha:
+                            traducao = sub_linha.split('TraduÃ§Ã£o:')[1].replace('**', '').strip()
                         
                         # Captura frases da tabela
-                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglês']):
+                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglÃªs']):
                             partes = sub_linha.split('|')
                             if len(partes) >= 3:
                                 frase_en = partes[1].replace('**', '').strip()
@@ -368,7 +370,7 @@ class AnkiApp:
     
     def excluir_palavra(self, index):
         """Remove uma palavra e suas frases da lista"""
-        if messagebox.askyesno("Confirmar Exclusão", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
+        if messagebox.askyesno("Confirmar ExclusÃ£o", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
             self.dados.pop(index)
             # Reorganizar selecoes
             novas_selecoes = {}
@@ -379,7 +381,7 @@ class AnkiApp:
                     novas_selecoes[i-1] = var
             self.selecoes = novas_selecoes
             self.mostrar_opcoes()
-            self.status_label.config(text=f"Palavra excluída. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
+            self.status_label.config(text=f"Palavra excluÃ­da. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
     
     def editar_palavra(self, index):
         """Abre janela para editar palavra, explicacao, pronuncia, traducao e frases"""
@@ -414,28 +416,28 @@ class AnkiApp:
         row += 1
         
         # Explicacao
-        tk.Label(scrollable_frame, text="Explicação:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="ExplicaÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
         explicacao_text = tk.Text(scrollable_frame, font=("Segoe UI", 10), width=60, height=4, wrap=tk.WORD)
         explicacao_text.insert("1.0", item['explicacao'])
         explicacao_text.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Pronuncia
-        tk.Label(scrollable_frame, text="Pronúncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="PronÃºncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         pronuncia_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         pronuncia_entry.insert(0, item['pronuncia'])
         pronuncia_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Traducao
-        tk.Label(scrollable_frame, text="Tradução:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="TraduÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         traducao_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         traducao_entry.insert(0, item['traducao'])
         traducao_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Frases
-        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglês | tradução):", 
+        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglÃªs | traduÃ§Ã£o):", 
                 font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, columnspan=2, sticky=tk.W, padx=10, pady=5)
         row += 1
         
@@ -467,11 +469,11 @@ class AnkiApp:
                             novas_frases.append({'en': en, 'pt': pt})
             
             if not nova_palavra:
-                messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
+                messagebox.showwarning("Aviso", "A palavra nÃ£o pode estar vazia!")
                 return
             
             if not novas_frases:
-                messagebox.showwarning("Aviso", "Pelo menos uma frase é obrigatória!")
+                messagebox.showwarning("Aviso", "Pelo menos uma frase Ã© obrigatÃ³ria!")
                 return
             
             # Atualizar dados
@@ -531,7 +533,7 @@ class AnkiApp:
             card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
             card.pack(fill=tk.X, pady=8, padx=5)
             
-            # Cabeçalho com botoes de acao
+            # CabeÃ§alho com botoes de acao
             header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
             header.pack(fill=tk.X)
             header.pack_propagate(False)
@@ -546,7 +548,7 @@ class AnkiApp:
             
             # Botoes de editar e excluir a direita
             btn_excluir = tk.Button(header, 
-                                    text="🗑️ Excluir", 
+                                    text="ðŸ—‘ï¸ Excluir", 
                                     bg=COLORS['danger'],
                                     fg='white',
                                     font=("Segoe UI", 9),
@@ -556,7 +558,7 @@ class AnkiApp:
             btn_excluir.pack(side=tk.RIGHT, padx=5)
             
             btn_editar = tk.Button(header, 
-                                   text="✏️ Editar", 
+                                   text="âœï¸ Editar", 
                                    bg=COLORS['warning'],
                                    fg='white',
                                    font=("Segoe UI", 9),
@@ -571,7 +573,7 @@ class AnkiApp:
             
             if item['explicacao'].strip():
                 tk.Label(info_frame, 
-                        text="EXPLICAÇÃO:",
+                        text="EXPLICAÃ‡ÃƒO:",
                         bg=COLORS['card_bg'],
                         fg=COLORS['secondary'],
                         font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
@@ -639,7 +641,7 @@ class AnkiApp:
                 frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
                 
                 traducao_frase = tk.Label(frase_frame,
-                                         text=f"→ {frase['pt']}",
+                                         text=f"â†’ {frase['pt']}",
                                          bg=frase_frame.cget('bg'),
                                          fg=COLORS['secondary'],
                                          wraplength=900,
@@ -721,9 +723,9 @@ class AnkiApp:
         frente = f"{frase_destacada} {audio_tag}" if audio_tag else frase_destacada
         
         verso = f"""{palavra}
-Explicação: {explicacao}
-Pronúncia: {pronuncia}
-Tradução: {traducao}"""
+ExplicaÃ§Ã£o: {explicacao}
+PronÃºncia: {pronuncia}
+TraduÃ§Ã£o: {traducao}"""
         
         note = {
             "deckName": "English",
@@ -864,12 +866,14 @@ Formato esperado: As frases e suas traduções devem vir em formato de tabela, c
                 <ol class="step-list">
                     <li class="step-item">
                         <div class="step-number">1</div>
-                        <div><strong>Gere a lista:</strong> Use o prompt acima com suas palavras do dia no <strong>DeepSeek</strong>. Lembre-se de usar o botão de copiar do próprio chat.</div>
+                        <div><strong>Gere a lista:</strong> Use o prompt acima com suas palavras do dia no
+                            <strong>DeepSeek</strong>. Lembre-se de usar o botão de copiar do próprio chat.</div>
                     </li>
                     <li class="step-item">
                         <div class="step-number">2</div>
                         <div><strong>Inicie o Script:</strong> No terminal, navegue até a pasta e rode
-                            <code>python anki_gui.py</code>.</div>
+                            <code>python anki_gui.py</code>.
+                        </div>
                     </li>
                     <li class="step-item">
                         <div class="step-number">3</div>
