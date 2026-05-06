@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automação Anki: Domine o Inglês com Python e IA</title>
+    <title>AutomaÃ§Ã£o Anki: Domine o InglÃªs com Python e IA</title>
     <meta name="description"
-        content="Tutorial completo sobre como automatizar a criação de cards no Anki usando Python e inteligência artificial.">
+        content="Tutorial completo sobre como automatizar a criaÃ§Ã£o de cards no Anki usando Python e inteligÃªncia artificial.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
     <style>
-        /* Estilos Críticos para Garantir Visibilidade Imediata */
+        /* Estilos CrÃ­ticos para Garantir Visibilidade Imediata */
         pre {
             background-color: #0f172a !important;
             color: #ffffff !important;
@@ -42,79 +42,79 @@
         <div class="container">
             <!-- Substituir pelo caminho real da imagem gerada -->
             <img src="hero.png" alt="Anki Automation Hero" class="hero-img">
-            <h1>📚 Automação de Cards ANKI</h1>
-            <p class="subtitle">Aprenda a criar centenas de flashcards com áudio e tradução em minutos usando Python e
-                Inteligência Artificial.</p>
+            <h1>ðŸ“š AutomaÃ§Ã£o de Cards ANKI</h1>
+            <p class="subtitle">Aprenda a criar centenas de flashcards com Ã¡udio e traduÃ§Ã£o em minutos usando Python e
+                InteligÃªncia Artificial.</p>
         </div>
     </header>
 
     <div class="container">
         <nav class="toc">
-            <h2>Conteúdo do Tutorial</h2>
+            <h2>ConteÃºdo do Tutorial</h2>
             <ul>
-                <li><a href="#introducao">1. O que é este tutorial?</a></li>
-                <li><a href="#python">2. Instalação do Python</a></li>
+                <li><a href="#introducao">1. O que Ã© este tutorial?</a></li>
+                <li><a href="#python">2. InstalaÃ§Ã£o do Python</a></li>
                 <li><a href="#ankiconnect">3. Anki Connect</a></li>
-                <li><a href="#dependencias">4. Dependências</a></li>
-                <li><a href="#script">5. O Script de Automação</a></li>
+                <li><a href="#dependencias">4. DependÃªncias</a></li>
+                <li><a href="#script">5. O Script de AutomaÃ§Ã£o</a></li>
                 <li><a href="#prompt">6. O Prompt de IA</a></li>
                 <li><a href="#uso">7. Como Usar</a></li>
-                <li><a href="#solucao">8. Solução de Problemas</a></li>
+                <li><a href="#solucao">8. SoluÃ§Ã£o de Problemas</a></li>
             </ul>
         </nav>
 
         <main>
             <section id="introducao">
-                <h2>1. O que é este tutorial?</h2>
-                <p>Este guia definitivo ensina você a <strong>automatizar a criação de cards no ANKI</strong> em lote.
+                <h2>1. O que Ã© este tutorial?</h2>
+                <p>Este guia definitivo ensina vocÃª a <strong>automatizar a criaÃ§Ã£o de cards no ANKI</strong> em lote.
                     Chega de copiar e colar manualmente palavra por palavra!</p>
                 <div class="step-item">
-                    <div class="step-number">✓</div>
+                    <div class="step-number">âœ“</div>
                     <div>
-                        <strong>Produtividade Máxima:</strong> Cole uma lista com 10 palavras e 50 frases de uma vez.
-                        Selecione a melhor frase com um clique e gere áudios automáticos com Google TTS.
+                        <strong>Produtividade MÃ¡xima:</strong> Cole uma lista com 10 palavras e 50 frases de uma vez.
+                        Selecione a melhor frase com um clique e gere Ã¡udios automÃ¡ticos com Google TTS.
                     </div>
                 </div>
             </section>
 
             <section id="python">
-                <h2>2. Instalação do Python</h2>
-                <p>O Python é o motor que roda nossa automação. Para instalá-lo no Windows:</p>
+                <h2>2. InstalaÃ§Ã£o do Python</h2>
+                <p>O Python Ã© o motor que roda nossa automaÃ§Ã£o. Para instalÃ¡-lo no Windows:</p>
                 <ol class="step-list">
                     <li class="step-item">
                         <div class="step-number">1</div>
                         <div>
                             <strong>Microsoft Store:</strong> Abra a loja, procure por "Python 3.12" e clique em
-                            instalar. É o método mais simples e seguro.
+                            instalar. Ã‰ o mÃ©todo mais simples e seguro.
                         </div>
                     </li>
                     <li class="step-item">
                         <div class="step-number">2</div>
                         <div>
-                            <strong>Site Oficial:</strong> Acesse python.org, baixe o instalador e <strong>não
-                                esqueça</strong> de marcar a opção "Add Python to PATH" na primeira tela.
+                            <strong>Site Oficial:</strong> Acesse python.org, baixe o instalador e <strong>nÃ£o
+                                esqueÃ§a</strong> de marcar a opÃ§Ã£o "Add Python to PATH" na primeira tela.
                         </div>
                     </li>
                 </ol>
             </section>
 
             <section id="ankiconnect">
-                <h2>3. Instalação do Anki Connect</h2>
+                <h2>3. InstalaÃ§Ã£o do Anki Connect</h2>
                 <p>O Anki Connect permite que o nosso script converse com o seu Anki. Siga os passos:</p>
                 <div class="step-item">
                     <div>
-                        1. No Anki, vá em <code>Ferramentas > Complementos > Obter Complementos</code>.<br>
-                        2. Digite o código: <strong>2055492159</strong><br>
+                        1. No Anki, vÃ¡ em <code>Ferramentas > Complementos > Obter Complementos</code>.<br>
+                        2. Digite o cÃ³digo: <strong>2055492159</strong><br>
                         3. Reinicie o Anki.
                     </div>
                 </div>
-                <p>Para verificar se está funcionando, acesse <code>http://localhost:8765</code> no seu navegador. Você
+                <p>Para verificar se estÃ¡ funcionando, acesse <code>http://localhost:8765</code> no seu navegador. VocÃª
                     deve ver uma mensagem do AnkiConnect.</p>
             </section>
 
             <section id="dependencias">
-                <h2>4. Instalação das Dependências</h2>
-                <p>Abra o Prompt de Comando (CMD) e execute o comando abaixo para instalar as bibliotecas necessárias:
+                <h2>4. InstalaÃ§Ã£o das DependÃªncias</h2>
+                <p>Abra o Prompt de Comando (CMD) e execute o comando abaixo para instalar as bibliotecas necessÃ¡rias:
                 </p>
                 <div class="code-container">
                     <button class="copy-btn">Copiar</button>
@@ -123,11 +123,11 @@
             </section>
 
             <section id="script">
-                <h2>5. O Script de Automação</h2>
-                <p>Este é o coração do projeto. Salve o código abaixo em um arquivo chamado <code>anki_gui.py</code>
+                <h2>5. O Script de AutomaÃ§Ã£o</h2>
+                <p>Este Ã© o coraÃ§Ã£o do projeto. Salve o cÃ³digo abaixo em um arquivo chamado <code>anki_gui.py</code>
                     dentro de uma pasta dedicada.</p>
                 <div class="code-container">
-                    <button class="copy-btn">Copiar Código</button>
+                    <button class="copy-btn">Copiar CÃ³digo</button>
                     <pre><code>import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, simpledialog, Toplevel
 import re
@@ -311,7 +311,7 @@ class AnkiApp:
         while i < len(linhas):
             linha = linhas[i].strip()
             
-            # Uma palavra começa com ### ou **palavra** (sem dois pontos no final para não confundir com metadados)
+            # Uma palavra comeÃ§a com ### ou **palavra** (sem dois pontos no final para nÃ£o confundir com metadados)
             if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
                 palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
                 if palavra_match:
@@ -324,24 +324,24 @@ class AnkiApp:
                     traducao = ""
                     frases = []
                     
-                    # Captura metadados e frases até a próxima palavra ou fim do texto
+                    # Captura metadados e frases atÃ© a prÃ³xima palavra ou fim do texto
                     while i < len(linhas):
                         sub_linha = linhas[i].strip()
                         
-                        # Se encontrar o início de outra palavra, interrompe a busca para este bloco
+                        # Se encontrar o inÃ­cio de outra palavra, interrompe a busca para este bloco
                         if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
                             break
                         
                         # Captura metadados
-                        if 'Explicação:' in sub_linha:
-                            explicacao = sub_linha.split('Explicação:')[1].replace('**', '').strip()
-                        elif 'Pronúncia:' in sub_linha:
-                            pronuncia = sub_linha.split('Pronúncia:')[1].replace('**', '').strip()
-                        elif 'Tradução:' in sub_linha:
-                            traducao = sub_linha.split('Tradução:')[1].replace('**', '').strip()
+                        if 'ExplicaÃ§Ã£o:' in sub_linha:
+                            explicacao = sub_linha.split('ExplicaÃ§Ã£o:')[1].replace('**', '').strip()
+                        elif 'PronÃºncia:' in sub_linha:
+                            pronuncia = sub_linha.split('PronÃºncia:')[1].replace('**', '').strip()
+                        elif 'TraduÃ§Ã£o:' in sub_linha:
+                            traducao = sub_linha.split('TraduÃ§Ã£o:')[1].replace('**', '').strip()
                         
                         # Captura frases da tabela
-                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglês']):
+                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglÃªs']):
                             partes = sub_linha.split('|')
                             if len(partes) >= 3:
                                 frase_en = partes[1].replace('**', '').strip()
@@ -368,7 +368,7 @@ class AnkiApp:
     
     def excluir_palavra(self, index):
         """Remove uma palavra e suas frases da lista"""
-        if messagebox.askyesno("Confirmar Exclusão", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
+        if messagebox.askyesno("Confirmar ExclusÃ£o", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
             self.dados.pop(index)
             # Reorganizar selecoes
             novas_selecoes = {}
@@ -379,7 +379,7 @@ class AnkiApp:
                     novas_selecoes[i-1] = var
             self.selecoes = novas_selecoes
             self.mostrar_opcoes()
-            self.status_label.config(text=f"Palavra excluída. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
+            self.status_label.config(text=f"Palavra excluÃ­da. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
     
     def editar_palavra(self, index):
         """Abre janela para editar palavra, explicacao, pronuncia, traducao e frases"""
@@ -414,28 +414,28 @@ class AnkiApp:
         row += 1
         
         # Explicacao
-        tk.Label(scrollable_frame, text="Explicação:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="ExplicaÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
         explicacao_text = tk.Text(scrollable_frame, font=("Segoe UI", 10), width=60, height=4, wrap=tk.WORD)
         explicacao_text.insert("1.0", item['explicacao'])
         explicacao_text.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Pronuncia
-        tk.Label(scrollable_frame, text="Pronúncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="PronÃºncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         pronuncia_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         pronuncia_entry.insert(0, item['pronuncia'])
         pronuncia_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Traducao
-        tk.Label(scrollable_frame, text="Tradução:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="TraduÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         traducao_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         traducao_entry.insert(0, item['traducao'])
         traducao_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
         # Frases
-        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglês | tradução):", 
+        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglÃªs | traduÃ§Ã£o):", 
                 font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, columnspan=2, sticky=tk.W, padx=10, pady=5)
         row += 1
         
@@ -467,11 +467,11 @@ class AnkiApp:
                             novas_frases.append({'en': en, 'pt': pt})
             
             if not nova_palavra:
-                messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
+                messagebox.showwarning("Aviso", "A palavra nÃ£o pode estar vazia!")
                 return
             
             if not novas_frases:
-                messagebox.showwarning("Aviso", "Pelo menos uma frase é obrigatória!")
+                messagebox.showwarning("Aviso", "Pelo menos uma frase Ã© obrigatÃ³ria!")
                 return
             
             # Atualizar dados
@@ -531,7 +531,7 @@ class AnkiApp:
             card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
             card.pack(fill=tk.X, pady=8, padx=5)
             
-            # Cabeçalho com botoes de acao
+            # CabeÃ§alho com botoes de acao
             header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
             header.pack(fill=tk.X)
             header.pack_propagate(False)
@@ -546,7 +546,7 @@ class AnkiApp:
             
             # Botoes de editar e excluir a direita
             btn_excluir = tk.Button(header, 
-                                    text="🗑️ Excluir", 
+                                    text="ðŸ—‘ï¸ Excluir", 
                                     bg=COLORS['danger'],
                                     fg='white',
                                     font=("Segoe UI", 9),
@@ -556,7 +556,7 @@ class AnkiApp:
             btn_excluir.pack(side=tk.RIGHT, padx=5)
             
             btn_editar = tk.Button(header, 
-                                   text="✏️ Editar", 
+                                   text="âœï¸ Editar", 
                                    bg=COLORS['warning'],
                                    fg='white',
                                    font=("Segoe UI", 9),
@@ -571,7 +571,7 @@ class AnkiApp:
             
             if item['explicacao'].strip():
                 tk.Label(info_frame, 
-                        text="EXPLICAÇÃO:",
+                        text="EXPLICAÃ‡ÃƒO:",
                         bg=COLORS['card_bg'],
                         fg=COLORS['secondary'],
                         font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
@@ -639,7 +639,7 @@ class AnkiApp:
                 frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
                 
                 traducao_frase = tk.Label(frase_frame,
-                                         text=f"→ {frase['pt']}",
+                                         text=f"â†’ {frase['pt']}",
                                          bg=frase_frame.cget('bg'),
                                          fg=COLORS['secondary'],
                                          wraplength=900,
@@ -721,9 +721,9 @@ class AnkiApp:
         frente = f"{frase_destacada} {audio_tag}" if audio_tag else frase_destacada
         
         verso = f"""{palavra}
-Explicação: {explicacao}
-Pronúncia: {pronuncia}
-Tradução: {traducao}"""
+ExplicaÃ§Ã£o: {explicacao}
+PronÃºncia: {pronuncia}
+TraduÃ§Ã£o: {traducao}"""
         
         note = {
             "deckName": "English",
@@ -826,12 +826,12 @@ if __name__ == "__main__":
 
             <section id="prompt">
                 <h2>6. O Prompt de IA</h2>
-                <p>Antes de usar o programa, você precisa ter sua lista de palavras com 5 frases cada. Você pode usar o <strong>DeepSeek</strong> (ou qualquer outro assistente de IA) para gerar essa lista automaticamente.</p>
+                <p>Antes de usar o programa, vocÃª precisa ter sua lista de palavras com 5 frases cada. VocÃª pode usar o <strong>DeepSeek</strong> (ou qualquer outro assistente de IA) para gerar essa lista automaticamente.</p>
                 
                 <h3>Prompt para copiar e colar:</h3>
                 <div class="code-container">
                     <button class="copy-btn">Copiar Prompt</button>
-                    <pre><code>Aja como um especialista em Tradução e Ensino de Idiomas para alunos de nível pré-intermediário que preferem um estilo descontraído e informal. Sua tarefa é fornecer as informações para cada palavra da lista a seguir, seguindo estas etapas:
+                    <pre><code>Aja como um especialista em TraduÃ§Ã£o e Ensino de Idiomas para alunos de nÃ­vel prÃ©-intermediÃ¡rio que preferem um estilo descontraÃ­do e informal. Sua tarefa Ã© fornecer as informaÃ§Ãµes para cada palavra da lista a seguir, seguindo estas etapas:
 
 Lista do dia:
 
@@ -848,14 +848,14 @@ threats
 motion
 clockwise
 
-Instruções:
+InstruÃ§Ãµes:
 Para cada palavra, siga as etapas detalhadas abaixo:
-Explicação: Dê uma explicação de 3 a 5 linhas sobre a tradução de inglês para português. As explicações devem ser descontraídas, como se estivesse explicando para um amigo.
-Pronúncia: Forneça a palavra destacada em negrito com sua pronúncia fonética padrão em inglês (IPA), seguida de uma pronúncia fonética "amigável" (mais fácil de ler para brasileiros), aproximando-se do português, mantenha tudo em letra minuscula.
-Tradução: Forneça a tradução da palavra de inglês para português, use como referência o site Reverso https://www.reverso.net/tradu%C3%A7%C3%A3o-texto 
-Exemplos de frases: Forneça 5 exemplos de frases em inglês, relacionadas ao cotidiano, que tenham entre 70 e 100 caracteres. As frases devem destacar a palavra em negrito.
-Tradução das frases: Traduza as 5 frases de inglês para o português, em um estilo informal, destacando a palavra principal em negrito.
-Formato esperado: As frases e suas traduções devem vir em formato de tabela, com a frase em inglês na primeira coluna e a tradução em português na segunda coluna.</code></pre>
+ExplicaÃ§Ã£o: DÃª uma explicaÃ§Ã£o de 3 a 5 linhas sobre a traduÃ§Ã£o de inglÃªs para portuguÃªs. As explicaÃ§Ãµes devem ser descontraÃ­das, como se estivesse explicando para um amigo.
+PronÃºncia: ForneÃ§a a palavra destacada em negrito com sua pronÃºncia fonÃ©tica padrÃ£o em inglÃªs (IPA), seguida de uma pronÃºncia fonÃ©tica "amigÃ¡vel" (mais fÃ¡cil de ler para brasileiros), aproximando-se do portuguÃªs, mantenha tudo em letra minuscula.
+TraduÃ§Ã£o: ForneÃ§a a traduÃ§Ã£o da palavra de inglÃªs para portuguÃªs, use como referÃªncia o site Reverso https://www.reverso.net/tradu%C3%A7%C3%A3o-texto 
+Exemplos de frases: ForneÃ§a 5 exemplos de frases em inglÃªs, relacionadas ao cotidiano, que tenham entre 70 e 100 caracteres. As frases devem destacar a palavra em negrito.
+TraduÃ§Ã£o das frases: Traduza as 5 frases de inglÃªs para o portuguÃªs, em um estilo informal, destacando a palavra principal em negrito.
+Formato esperado: As frases e suas traduÃ§Ãµes devem vir em formato de tabela, com a frase em inglÃªs na primeira coluna e a traduÃ§Ã£o em portuguÃªs na segunda coluna.</code></pre>
                 </div>
             </section>
 
@@ -864,11 +864,11 @@ Formato esperado: As frases e suas traduções devem vir em formato de tabela, c
                 <ol class="step-list">
                     <li class="step-item">
                         <div class="step-number">1</div>
-                        <div><strong>Gere a lista:</strong> Use o prompt acima com suas palavras do dia no <strong>DeepSeek</strong>. Lembre-se de usar o botão de copiar do próprio chat.</div>
+                        <div><strong>Gere a lista:</strong> Use o prompt acima com suas palavras do dia no <strong>DeepSeek</strong>. Lembre-se de usar o botÃ£o de copiar do prÃ³prio chat.</div>
                     </li>
                     <li class="step-item">
                         <div class="step-number">2</div>
-                        <div><strong>Inicie o Script:</strong> No terminal, navegue até a pasta e rode
+                        <div><strong>Inicie o Script:</strong> No terminal, navegue atÃ© a pasta e rode
                             <code>python anki_gui.py</code>.</div>
                     </li>
                     <li class="step-item">
@@ -880,30 +880,30 @@ Formato esperado: As frases e suas traduções devem vir em formato de tabela, c
             </section>
 
             <section id="solucao">
-                <h2>8. Solução de Problemas</h2>
+                <h2>8. SoluÃ§Ã£o de Problemas</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Problema</th>
-                            <th>Solução</th>
+                            <th>SoluÃ§Ã£o</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Python não reconhecido</td>
+                            <td>Python nÃ£o reconhecido</td>
                             <td>Reinstale marcando "Add to PATH"</td>
                         </tr>
                         <tr>
-                            <td>Anki Connect não responde</td>
-                            <td>Verifique se o Anki está aberto</td>
+                            <td>Anki Connect nÃ£o responde</td>
+                            <td>Verifique se o Anki estÃ¡ aberto</td>
                         </tr>
                         <tr>
-                            <td>Erro de Áudio</td>
-                            <td>Verifique a conexão com a internet</td>
+                            <td>Erro de Ãudio</td>
+                            <td>Verifique a conexÃ£o com a internet</td>
                         </tr>
                         <tr>
-                            <td>O script não encontra dados</td>
-                            <td>Certifique-se de usar o <strong>DeepSeek</strong> com o botão de copiar do chat</td>
+                            <td>O script nÃ£o encontra dados</td>
+                            <td>Certifique-se de usar o <strong>DeepSeek</strong> com o botÃ£o de copiar do chat</td>
                         </tr>
                     </tbody>
                 </table>
@@ -913,7 +913,7 @@ Formato esperado: As frases e suas traduções devem vir em formato de tabela, c
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Tutorial de Automação Anki. Criado para estudantes de idiomas de alta performance.</p>
+            <p>&copy; 2026 Tutorial de AutomaÃ§Ã£o Anki. Criado para estudantes de idiomas de alta performance.</p>
             <p><a href="#">Voltar ao topo</a></p>
         </div>
     </footer>
@@ -922,3 +922,4 @@ Formato esperado: As frases e suas traduções devem vir em formato de tabela, c
 </body>
 
 </html>
+
