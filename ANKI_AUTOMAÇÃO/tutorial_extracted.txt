@@ -1,68 +1,68 @@
-﻿# ðŸ“š Tutorial Completo: AutomaÃ§Ã£o de Cards ANKI
+# 📚 Tutorial Completo: Automação de Cards ANKI
 
-## Ãndice
-1. [O que Ã© este tutorial?](#1-o-que-Ã©-este-tutorial)
-2. [InstalaÃ§Ã£o do Python](#2-instalaÃ§Ã£o-do-python)
-3. [InstalaÃ§Ã£o do Anki Connect](#3-instalaÃ§Ã£o-do-anki-connect)
-4. [InstalaÃ§Ã£o das DependÃªncias](#4-instalaÃ§Ã£o-das-dependÃªncias)
+## Índice
+1. [O que é este tutorial?](#1-o-que-é-este-tutorial)
+2. [Instalação do Python](#2-instalação-do-python)
+3. [Instalação do Anki Connect](#3-instalação-do-anki-connect)
+4. [Instalação das Dependências](#4-instalação-das-dependências)
 5. [Criando o Script](#5-criando-o-script)
 6. [Formato das Frases](#6-formato-das-frases)
 7. [Como Usar o Programa](#7-como-usar-o-programa)
-8. [SoluÃ§Ã£o de Problemas](#8-soluÃ§Ã£o-de-problemas)
+8. [Solução de Problemas](#8-solução-de-problemas)
 
 ---
 
-## 1. O que Ã© este tutorial?
+## 1. O que é este tutorial?
 
-Este tutorial vai te ensinar a **automatizar a criaÃ§Ã£o de cards no ANKI** em lote. VocÃª vai poder:
+Este tutorial vai te ensinar a **automatizar a criação de cards no ANKI** em lote. Você vai poder:
 
-- âœ… Colar uma lista com 10 palavras e 50 frases de uma vez
-- âœ… Selecionar 1 frase por palavra com um clique
-- âœ… Editar ou excluir palavras antes de criar os cards
-- âœ… Gerar Ã¡udio automaticamente com Google TTS
-- âœ… Criar todos os cards no ANKI com um clique
+- ✅ Colar uma lista com 10 palavras e 50 frases de uma vez
+- ✅ Selecionar 1 frase por palavra com um clique
+- ✅ Editar ou excluir palavras antes de criar os cards
+- ✅ Gerar áudio automaticamente com Google TTS
+- ✅ Criar todos os cards no ANKI com um clique
 
-**Tempo estimado:** 15-20 minutos para instalaÃ§Ã£o inicial
+**Tempo estimado:** 15-20 minutos para instalação inicial
 
 ---
 
-## 2. InstalaÃ§Ã£o do Python
+## 2. Instalação do Python
 
-### O que Ã© Python?
-Python Ã© a linguagem de programaÃ§Ã£o que vai rodar nosso script de automaÃ§Ã£o.
+### O que é Python?
+Python é a linguagem de programação que vai rodar nosso script de automação.
 
 ### Passo a passo para Windows:
 
-**OpÃ§Ã£o A - Via Microsoft Store (MAIS FÃCIL - RECOMENDADO):**
+**Opção A - Via Microsoft Store (MAIS FÁCIL - RECOMENDADO):**
 
-1. Abra a **Microsoft Store** (botÃ£o Iniciar â†’ digite "Microsoft Store")
+1. Abra a **Microsoft Store** (botão Iniciar → digite "Microsoft Store")
 
 2. Na barra de pesquisa, digite **"Python 3.12"**
 
-3. Selecione **Python 3.12** (ou a versÃ£o mais recente disponÃ­vel)
+3. Selecione **Python 3.12** (ou a versão mais recente disponível)
 
-4. Clique no botÃ£o **"Obter"** ou **"Instalar"**
+4. Clique no botão **"Obter"** ou **"Instalar"**
 
-5. Aguarde a instalaÃ§Ã£o (cerca de 2-3 minutos)
+5. Aguarde a instalação (cerca de 2-3 minutos)
 
 6. Quando terminar, clique em **"Iniciar"** ou **"Abrir"**
 
-**OpÃ§Ã£o B - Via Site Oficial:**
+**Opção B - Via Site Oficial:**
 
 1. Acesse [python.org/downloads](https://www.python.org/downloads/)
 
-2. Clique no botÃ£o amarelo **"Download Python 3.12.x"**
+2. Clique no botão amarelo **"Download Python 3.12.x"**
 
 3. Execute o arquivo baixado
 
-4. **âš ï¸ ATENÃ‡ÃƒO:** Na primeira tela, **MARQUE** a opÃ§Ã£o:
+4. **⚠️ ATENÇÃO:** Na primeira tela, **MARQUE** a opção:
    ```
-   â˜‘ï¸ Add Python to PATH
+   ☑️ Add Python to PATH
    ```
 
 5. Clique em **"Install Now"**
 
-6. Aguarde a instalaÃ§Ã£o e clique em **"Close"**
+6. Aguarde a instalação e clique em **"Close"**
 
 ### Verificar se instalou corretamente:
 
@@ -80,32 +80,32 @@ Python Ã© a linguagem de programaÃ§Ã£o que vai rodar nosso script de autom
    Python 3.12.x
    ```
 
-Se aparecer esse texto, o Python estÃ¡ instalado corretamente! âœ…
+Se aparecer esse texto, o Python está instalado corretamente! ✅
 
 ---
 
-## 3. InstalaÃ§Ã£o do Anki Connect
+## 3. Instalação do Anki Connect
 
-### O que Ã© Anki Connect?
-Ã‰ um complemento do ANKI que permite que programas externos (como nosso script) se comuniquem com o ANKI.
+### O que é Anki Connect?
+É um complemento do ANKI que permite que programas externos (como nosso script) se comuniquem com o ANKI.
 
 ### Passo a passo:
 
 1. **Abra o ANKI**
 
-2. No menu superior, vÃ¡ em:
+2. No menu superior, vá em:
    ```
-   Ferramentas â†’ Complementos â†’ Obter Complementos...
+   Ferramentas → Complementos → Obter Complementos...
    ```
 
-3. Uma janela vai abrir. Digite o cÃ³digo:
+3. Uma janela vai abrir. Digite o código:
    ```
    2055492159
    ```
 
 4. Clique em **"OK"**
 
-5. Aguarde o download e instalaÃ§Ã£o
+5. Aguarde o download e instalação
 
 6. **Reinicie o ANKI** quando solicitado
 
@@ -113,7 +113,7 @@ Se aparecer esse texto, o Python estÃ¡ instalado corretamente! âœ…
 
 1. Com o ANKI aberto, abra seu navegador (Chrome, Edge, Firefox)
 
-2. Digite na barra de endereÃ§os:
+2. Digite na barra de endereços:
    ```
    http://localhost:8765
    ```
@@ -123,14 +123,14 @@ Se aparecer esse texto, o Python estÃ¡ instalado corretamente! âœ…
    {"apiVersion": "AnkiConnect v.6"}
    ```
 
-Se aparecer essa mensagem, o Anki Connect estÃ¡ funcionando! âœ…
+Se aparecer essa mensagem, o Anki Connect está funcionando! ✅
 
 ---
 
-## 4. InstalaÃ§Ã£o das DependÃªncias
+## 4. Instalação das Dependências
 
-### O que sÃ£o dependÃªncias?
-SÃ£o bibliotecas extras que o Python precisa para gerar Ã¡udio e se comunicar com o ANKI.
+### O que são dependências?
+São bibliotecas extras que o Python precisa para gerar áudio e se comunicar com o ANKI.
 
 ### Passo a passo:
 
@@ -141,7 +141,7 @@ SÃ£o bibliotecas extras que o Python precisa para gerar Ã¡udio e se comunica
    pip install requests gtts
    ```
 
-3. Aguarde a instalaÃ§Ã£o. VocÃª verÃ¡ mensagens como:
+3. Aguarde a instalação. Você verá mensagens como:
    ```
    Collecting requests...
    Downloading requests-2.33.0-py3-none-any.whl
@@ -163,20 +163,20 @@ Bibliotecas instaladas com sucesso!
 
 ## 5. Criando o Script
 
-### O que Ã© o script?
-Ã‰ o programa que vai automatizar tudo. VocÃª vai salvar um arquivo no seu computador.
+### O que é o script?
+É o programa que vai automatizar tudo. Você vai salvar um arquivo no seu computador.
 
 ### Passo a passo:
 
-1. **Crie uma pasta** na Ãrea de Trabalho chamada `anki_automacao`
+1. **Crie uma pasta** na Área de Trabalho chamada `anki_automacao`
 
 2. **Abra o Bloco de Notas** (Notepad)
 
-3. **Copie o cÃ³digo completo abaixo** e cole no Bloco de Notas:
+3. **Copie o código completo abaixo** e cole no Bloco de Notas:
 
 ```python
 import tkinter as tk
-from tkinter import ttk, scrolledtext, messagebox, simpledialog, Toplevel
+from tkinter import ttk, scrolledtext, messagebox
 import re
 import requests
 import os
@@ -192,10 +192,10 @@ COLORS = {
     'primary_light': '#7f8cfa',
     'secondary': '#718096',
     'success': '#48bb78',
-    'success_light': '#a8e6cf',  # Verde claro
+    'success_light': '#a8e6cf',
     'warning': '#ed8936',
     'danger': '#f56565',
-    'danger_light': '#fed7d7',   # Vermelho claro para texto
+    'danger_light': '#fed7d7',
     'light': '#ffffff',
     'light_gray': '#f7fafc',
     'dark': '#2d3748',
@@ -263,7 +263,7 @@ class AnkiApp:
                                                       bg=COLORS['light_gray'])
         self.texto_input.pack(fill=tk.X, padx=15, pady=(0, 10))
         
-        # Botoes superiores - REDUZIDOS
+        # Botoes superiores
         btn_frame = tk.Frame(main_frame, bg=COLORS['bg'])
         btn_frame.grid(row=2, column=0, sticky="ew", pady=(0, 15))
         
@@ -296,7 +296,7 @@ class AnkiApp:
                                      font=("Segoe UI", 9))
         self.status_label.pack(side=tk.RIGHT, padx=10)
         
-        # Area de selecao - ALTURA AUMENTADA
+        # Area de selecao
         palavras_frame = tk.Frame(main_frame, bg=COLORS['light'], relief=tk.GROOVE, bd=1)
         palavras_frame.grid(row=3, column=0, sticky="nsew", pady=(0, 10))
         palavras_frame.grid_rowconfigure(1, weight=1)
@@ -332,7 +332,7 @@ class AnkiApp:
             self.canvas.itemconfig(1, width=event.width)
         self.canvas.bind("<Configure>", _configure_canvas)
         
-        # Botao criar cards - METADE DO TAMANHO, VERDE CLARO FUNDO, TEXTO VERMELHO
+        # Botao criar cards
         bottom_frame = tk.Frame(main_frame, bg=COLORS['bg'])
         bottom_frame.grid(row=4, column=0, sticky="ew", pady=8)
         
@@ -358,41 +358,54 @@ class AnkiApp:
         while i < len(linhas):
             linha = linhas[i].strip()
             
-            # Uma palavra comeÃ§a com ### ou **palavra** (sem dois pontos no final para nÃ£o confundir com metadados)
-            if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
-                palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
+            if linha.startswith('###') or (linha.startswith('**') and not linha.startswith('**Explicação')):
+                palavra_match = re.search(r'\*\*([^*]+)\*\*', linha)
                 if palavra_match:
-                    palavra = (palavra_match.group(1) or palavra_match.group(2)).strip()
-                    palavra = re.sub(r'^\d+\.\s*', '', palavra)
+                    palavra = palavra_match.group(1).strip()
                     i += 1
                     
-                    explicacao = ""
-                    pronuncia = ""
-                    traducao = ""
-                    frases = []
+                    while i < len(linhas) and not linhas[i].strip():
+                        i += 1
                     
-                    # Captura metadados e frases atÃ© a prÃ³xima palavra ou fim do texto
+                    explicacao = ""
+                    if i < len(linhas) and 'Explicação:' in linhas[i]:
+                        explicacao = linhas[i].replace('Explicação:', '').replace('**', '').strip()
+                        explicacao = re.sub(r'\*\*([^*]+)\*\*', r'\1', explicacao)
+                        i += 1
+                    
+                    while i < len(linhas) and not linhas[i].strip():
+                        i += 1
+                    
+                    pronuncia = ""
+                    if i < len(linhas) and 'Pronúncia:' in linhas[i]:
+                        pronuncia = linhas[i].replace('Pronúncia:', '').replace('**', '').strip()
+                        pronuncia = re.sub(r'\*\*([^*]+)\*\*', r'\1', pronuncia)
+                        i += 1
+                    
+                    while i < len(linhas) and not linhas[i].strip():
+                        i += 1
+                    
+                    traducao = ""
+                    if i < len(linhas) and 'Tradução:' in linhas[i]:
+                        traducao = linhas[i].replace('Tradução:', '').replace('**', '').strip()
+                        traducao = re.sub(r'\*\*([^*]+)\*\*', r'\1', traducao)
+                        i += 1
+                    
+                    frases = []
                     while i < len(linhas):
-                        sub_linha = linhas[i].strip()
+                        linha_atual = linhas[i].strip()
                         
-                        # Se encontrar o inÃ­cio de outra palavra, interrompe a busca para este bloco
-                        if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
+                        if linha_atual.startswith('###') or (linha_atual.startswith('**') and 'Explicação' not in linha_atual):
                             break
                         
-                        # Captura metadados
-                        if 'ExplicaÃ§Ã£o:' in sub_linha:
-                            explicacao = sub_linha.split('ExplicaÃ§Ã£o:')[1].replace('**', '').strip()
-                        elif 'PronÃºncia:' in sub_linha:
-                            pronuncia = sub_linha.split('PronÃºncia:')[1].replace('**', '').strip()
-                        elif 'TraduÃ§Ã£o:' in sub_linha:
-                            traducao = sub_linha.split('TraduÃ§Ã£o:')[1].replace('**', '').strip()
-                        
-                        # Captura frases da tabela
-                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglÃªs']):
-                            partes = sub_linha.split('|')
+                        if '|' in linha_atual and not linha_atual.startswith('|--') and not 'Frase em inglês' in linha_atual and not '---' in linha_atual:
+                            partes = linha_atual.split('|')
                             if len(partes) >= 3:
-                                frase_en = partes[1].replace('**', '').strip()
-                                frase_pt = partes[2].replace('**', '').strip()
+                                frase_en = partes[1].strip().replace('**', '').strip()
+                                frase_pt = partes[2].strip().replace('**', '').strip()
+                                frase_en = re.sub(r'\*\*([^*]+)\*\*', r'\1', frase_en)
+                                frase_pt = re.sub(r'\*\*([^*]+)\*\*', r'\1', frase_pt)
+                                
                                 if frase_en and frase_pt:
                                     frases.append({'en': frase_en, 'pt': frase_pt})
                         
@@ -414,10 +427,8 @@ class AnkiApp:
         return dados
     
     def excluir_palavra(self, index):
-        """Remove uma palavra e suas frases da lista"""
-        if messagebox.askyesno("Confirmar ExclusÃ£o", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
+        if messagebox.askyesno("Confirmar Exclusão", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
             self.dados.pop(index)
-            # Reorganizar selecoes
             novas_selecoes = {}
             for i, var in enumerate(self.selecoes.values()):
                 if i < index:
@@ -426,19 +437,16 @@ class AnkiApp:
                     novas_selecoes[i-1] = var
             self.selecoes = novas_selecoes
             self.mostrar_opcoes()
-            self.status_label.config(text=f"Palavra excluÃ­da. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
+            self.status_label.config(text=f"Palavra excluída. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
     
     def editar_palavra(self, index):
-        """Abre janela para editar palavra, explicacao, pronuncia, traducao e frases"""
         item = self.dados[index]
         
-        # Criar janela de edicao
         edit_window = Toplevel(self.root)
         edit_window.title(f"Editando: {item['palavra']}")
         edit_window.geometry("800x700")
         edit_window.configure(bg=COLORS['bg'])
         
-        # Frame com scroll
         canvas = tk.Canvas(edit_window, bg=COLORS['bg'], highlightthickness=0)
         scrollbar = ttk.Scrollbar(edit_window, orient="vertical", command=canvas.yview)
         scrollable_frame = tk.Frame(canvas, bg=COLORS['bg'])
@@ -453,36 +461,31 @@ class AnkiApp:
         
         row = 0
         
-        # Palavra
         tk.Label(scrollable_frame, text="Palavra:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         palavra_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         palavra_entry.insert(0, item['palavra'])
         palavra_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
-        # Explicacao
-        tk.Label(scrollable_frame, text="ExplicaÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="Explicação:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
         explicacao_text = tk.Text(scrollable_frame, font=("Segoe UI", 10), width=60, height=4, wrap=tk.WORD)
         explicacao_text.insert("1.0", item['explicacao'])
         explicacao_text.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
-        # Pronuncia
-        tk.Label(scrollable_frame, text="PronÃºncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="Pronúncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         pronuncia_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         pronuncia_entry.insert(0, item['pronuncia'])
         pronuncia_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
-        # Traducao
-        tk.Label(scrollable_frame, text="TraduÃ§Ã£o:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        tk.Label(scrollable_frame, text="Tradução:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
         traducao_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
         traducao_entry.insert(0, item['traducao'])
         traducao_entry.grid(row=row, column=1, padx=10, pady=5)
         row += 1
         
-        # Frases
-        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglÃªs | traduÃ§Ã£o):", 
+        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglês | tradução):", 
                 font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, columnspan=2, sticky=tk.W, padx=10, pady=5)
         row += 1
         
@@ -492,7 +495,6 @@ class AnkiApp:
         frases_text.grid(row=row, column=0, columnspan=2, padx=10, pady=5)
         row += 1
         
-        # Botoes
         btn_frame = tk.Frame(scrollable_frame, bg=COLORS['bg'])
         btn_frame.grid(row=row, column=0, columnspan=2, pady=15)
         
@@ -502,7 +504,6 @@ class AnkiApp:
             nova_pronuncia = pronuncia_entry.get().strip()
             nova_traducao = traducao_entry.get().strip()
             
-            # Processar frases
             novas_frases = []
             for linha in frases_text.get("1.0", tk.END).strip().split('\n'):
                 if '|' in linha:
@@ -514,14 +515,13 @@ class AnkiApp:
                             novas_frases.append({'en': en, 'pt': pt})
             
             if not nova_palavra:
-                messagebox.showwarning("Aviso", "A palavra nÃ£o pode estar vazia!")
+                messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
                 return
             
             if not novas_frases:
-                messagebox.showwarning("Aviso", "Pelo menos uma frase Ã© obrigatÃ³ria!")
+                messagebox.showwarning("Aviso", "Pelo menos uma frase é obrigatória!")
                 return
             
-            # Atualizar dados
             self.dados[index] = {
                 'palavra': nova_palavra,
                 'explicacao': nova_explicacao,
@@ -530,7 +530,6 @@ class AnkiApp:
                 'frases': novas_frases
             }
             
-            # Atualizar selecao
             var = tk.IntVar()
             var.set(0)
             self.selecoes[index] = var
@@ -574,26 +573,22 @@ class AnkiApp:
             widget.destroy()
         
         for i, item in enumerate(self.dados):
-            # Card principal
             card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
             card.pack(fill=tk.X, pady=8, padx=5)
             
-            # CabeÃ§alho com botoes de acao
             header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
             header.pack(fill=tk.X)
             header.pack_propagate(False)
             
-            # Titulo a esquerda
             palavra_label = tk.Label(header, 
-                                     text=item['palavra'].title(), 
+                                     text=f"{i+1}. {item['palavra']}", 
                                      font=("Segoe UI", 14, "bold"),
                                      bg=COLORS['header_bg'],
                                      fg=COLORS['primary'])
             palavra_label.pack(side=tk.LEFT, padx=15, pady=10)
             
-            # Botoes de editar e excluir a direita
             btn_excluir = tk.Button(header, 
-                                    text="ðŸ—‘ï¸ Excluir", 
+                                    text="🗑️ Excluir", 
                                     bg=COLORS['danger'],
                                     fg='white',
                                     font=("Segoe UI", 9),
@@ -603,7 +598,7 @@ class AnkiApp:
             btn_excluir.pack(side=tk.RIGHT, padx=5)
             
             btn_editar = tk.Button(header, 
-                                   text="âœï¸ Editar", 
+                                   text="✏️ Editar", 
                                    bg=COLORS['warning'],
                                    fg='white',
                                    font=("Segoe UI", 9),
@@ -612,47 +607,44 @@ class AnkiApp:
                                    command=lambda idx=i: self.editar_palavra(idx))
             btn_editar.pack(side=tk.RIGHT, padx=5)
             
-            # Informacoes
             info_frame = tk.Frame(card, bg=COLORS['card_bg'])
             info_frame.pack(fill=tk.X, padx=15, pady=10)
             
-            if item['explicacao'].strip():
-                tk.Label(info_frame, 
-                        text="EXPLICAÃ‡ÃƒO:",
-                        bg=COLORS['card_bg'],
-                        fg=COLORS['secondary'],
-                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
-                
-                explicacao_label = tk.Label(info_frame,
-                                            text=item['explicacao'][:150] + "..." if len(item['explicacao']) > 150 else item['explicacao'],
-                                            bg=COLORS['light_gray'],
-                                            fg=COLORS['dark'],
-                                            font=("Segoe UI", 9),
-                                            wraplength=1000,
-                                            justify=tk.LEFT,
-                                            padx=8,
-                                            pady=5,
-                                            relief=tk.FLAT)
-                explicacao_label.pack(fill=tk.X, pady=(0, 8))
+            tk.Label(info_frame, 
+                    text="EXPLICACAO:",
+                    bg=COLORS['card_bg'],
+                    fg=COLORS['secondary'],
+                    font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
             
-            if item['traducao'].strip():
-                tk.Label(info_frame,
-                        text=f"{item['palavra'].upper()}:",
-                        bg=COLORS['card_bg'],
-                        fg=COLORS['secondary'],
-                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
-                
-                traducao_label = tk.Label(info_frame,
-                                          text=item['traducao'],
-                                          bg=COLORS['light_gray'],
-                                          fg=COLORS['dark'],
-                                          font=("Segoe UI", 9),
-                                          wraplength=1000,
-                                          justify=tk.LEFT,
-                                          padx=8,
-                                          pady=5,
-                                          relief=tk.FLAT)
-                traducao_label.pack(fill=tk.X, pady=(0, 8))
+            explicacao_label = tk.Label(info_frame,
+                                        text=item['explicacao'][:150] + "..." if len(item['explicacao']) > 150 else item['explicacao'],
+                                        bg=COLORS['light_gray'],
+                                        fg=COLORS['dark'],
+                                        font=("Segoe UI", 9),
+                                        wraplength=1000,
+                                        justify=tk.LEFT,
+                                        padx=8,
+                                        pady=5,
+                                        relief=tk.FLAT)
+            explicacao_label.pack(fill=tk.X, pady=(0, 8))
+            
+            tk.Label(info_frame,
+                    text="TRADUCAO:",
+                    bg=COLORS['card_bg'],
+                    fg=COLORS['secondary'],
+                    font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
+            
+            traducao_label = tk.Label(info_frame,
+                                      text=item['traducao'],
+                                      bg=COLORS['light_gray'],
+                                      fg=COLORS['dark'],
+                                      font=("Segoe UI", 9),
+                                      wraplength=1000,
+                                      justify=tk.LEFT,
+                                      padx=8,
+                                      pady=5,
+                                      relief=tk.FLAT)
+            traducao_label.pack(fill=tk.X, pady=(0, 8))
             
             tk.Label(info_frame,
                     text="SELECIONE UMA FRASE:",
@@ -686,7 +678,7 @@ class AnkiApp:
                 frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
                 
                 traducao_frase = tk.Label(frase_frame,
-                                         text=f"â†’ {frase['pt']}",
+                                         text=f"→ {frase['pt']}",
                                          bg=frase_frame.cget('bg'),
                                          fg=COLORS['secondary'],
                                          wraplength=900,
@@ -768,9 +760,9 @@ class AnkiApp:
         frente = f"{frase_destacada} {audio_tag}" if audio_tag else frase_destacada
         
         verso = f"""{palavra}
-ExplicaÃ§Ã£o: {explicacao}
-PronÃºncia: {pronuncia}
-TraduÃ§Ã£o: {traducao}"""
+Explicação: {explicacao}
+Pronúncia: {pronuncia}
+Tradução: {traducao}"""
         
         note = {
             "deckName": "English",
@@ -872,8 +864,8 @@ if __name__ == "__main__":
 ```
 
 4. **Salve o arquivo** com o nome exato:
-   - Clique em **"Arquivo" â†’ "Salvar como"**
-   - Navegue atÃ© a pasta `anki_automacao` na Ãrea de Trabalho
+   - Clique em **"Arquivo" → "Salvar como"**
+   - Navegue até a pasta `anki_automacao` na Área de Trabalho
    - Em **"Nome do arquivo"**, digite: `anki_gui.py`
    - Em **"Salvar como tipo"**, selecione: **"Todos os arquivos (*.*)"**
    - Clique em **"Salvar"**
@@ -884,45 +876,45 @@ if __name__ == "__main__":
 
 ### Como suas frases devem estar organizadas
 
-O programa espera um formato especÃ­fico. **Use este modelo exato:**
+O programa espera um formato específico. **Use este modelo exato:**
 
 ```markdown
 ### **get down**
-**ExplicaÃ§Ã£o:** "Get down" pode significar "descer" (fisicamente), "danÃ§ar" (gÃ­ria), ou "se concentrar/comeÃ§ar a sÃ©rio" (get down to business). Ã‰ uma expressÃ£o bem versÃ¡til.
-**PronÃºncia:** /É¡et daÊŠn/ | gÃ©t dÃ¡un
-**TraduÃ§Ã£o:** descer / danÃ§ar / comeÃ§ar a sÃ©rio
+**Explicação:** "Get down" pode significar "descer" (fisicamente), "dançar" (gíria), ou "se concentrar/começar a sério" (get down to business). É uma expressão bem versátil.
+**Pronúncia:** /ɡet daʊn/ | gét dáun
+**Tradução:** descer / dançar / começar a sério
 
-| **Frase em inglÃªs** | **TraduÃ§Ã£o em portuguÃªs** |
+| **Frase em inglês** | **Tradução em português** |
 |---------------------|---------------------------|
-| Get down from that tree before you fall! | Desce dessa Ã¡rvore antes que vocÃª caia! |
-| The party was great; everyone was getting down on the dance floor. | A festa foi Ã³tima; todo mundo estava danÃ§ando muito. |
-| Let's get down to business and finish this project. | Vamos comeÃ§ar a sÃ©rio e terminar esse projeto. |
-| The kids got down on their knees to look for the lost ring. | As crianÃ§as se ajoelharam para procurar o anel perdido. |
-| Get down! There's danger outside. | Se abaixa! Tem perigo lÃ¡ fora. |
+| Get down from that tree before you fall! | Desce dessa árvore antes que você caia! |
+| The party was great; everyone was getting down on the dance floor. | A festa foi ótima; todo mundo estava dançando muito. |
+| Let's get down to business and finish this project. | Vamos começar a sério e terminar esse projeto. |
+| The kids got down on their knees to look for the lost ring. | As crianças se ajoelharam para procurar o anel perdido. |
+| Get down! There's danger outside. | Se abaixa! Tem perigo lá fora. |
 
 ### **banning**
-**ExplicaÃ§Ã£o:** "Banning" Ã© o ato de proibir algo oficialmente, seja por lei, regra ou polÃ­tica. Ã‰ quando algo Ã© "banido" ou vetado.
-**PronÃºncia:** /ËˆbÃ¦nÉªÅ‹/ | bÃ©-nin
-**TraduÃ§Ã£o:** proibindo / banindo
+**Explicação:** "Banning" é o ato de proibir algo oficialmente, seja por lei, regra ou política. É quando algo é "banido" ou vetado.
+**Pronúncia:** /ˈbænɪŋ/ | bé-nin
+**Tradução:** proibindo / banindo
 
-| **Frase em inglÃªs** | **TraduÃ§Ã£o em portuguÃªs** |
+| **Frase em inglês** | **Tradução em português** |
 |---------------------|---------------------------|
-| The government is banning single-use plastics. | O governo estÃ¡ proibindo plÃ¡sticos descartÃ¡veis. |
-| Many schools are banning cell phones in class. | Muitas escolas estÃ£o proibindo celular em sala de aula. |
-| Banning smoking in public places has improved air quality. | Proibir fumar em locais pÃºblicos melhorou a qualidade do ar. |
-| The app was banned in several countries. | O aplicativo foi banido em vÃ¡rios paÃ­ses. |
-| They're banning cars from the city center. | Eles estÃ£o proibindo carros no centro da cidade. |
+| The government is banning single-use plastics. | O governo está proibindo plásticos descartáveis. |
+| Many schools are banning cell phones in class. | Muitas escolas estão proibindo celular em sala de aula. |
+| Banning smoking in public places has improved air quality. | Proibir fumar em locais públicos melhorou a qualidade do ar. |
+| The app was banned in several countries. | O aplicativo foi banido em vários países. |
+| They're banning cars from the city center. | Eles estão proibindo carros no centro da cidade. |
 ```
 
 ### Regras importantes:
 
-| Regra | ExplicaÃ§Ã£o |
+| Regra | Explicação |
 |-------|------------|
-| **### **palavra**** | Cada palavra deve comeÃ§ar com `### ` e a palavra em **negrito** |
-| **ExplicaÃ§Ã£o:** | Deve vir logo apÃ³s a palavra |
-| **PronÃºncia:** | Deve vir apÃ³s a explicaÃ§Ã£o |
-| **TraduÃ§Ã£o:** | Deve vir apÃ³s a pronÃºncia |
-| **Tabela de frases** | Usar `|` para separar inglÃªs da traduÃ§Ã£o |
+| **### **palavra**** | Cada palavra deve começar com `### ` e a palavra em **negrito** |
+| **Explicação:** | Deve vir logo após a palavra |
+| **Pronúncia:** | Deve vir após a explicação |
+| **Tradução:** | Deve vir após a pronúncia |
+| **Tabela de frases** | Usar `|` para separar inglês da tradução |
 | **Separador entre palavras** | Deixar uma linha em branco entre palavras |
 
 ---
@@ -937,7 +929,7 @@ Copie suas 10 palavras com suas 5 frases cada no formato mostrado acima.
 
 1. **Abra o Prompt de Comando** (CMD)
 
-2. **Navegue atÃ© a pasta:**
+2. **Navegue até a pasta:**
    ```bash
    cd C:\Users\SeuUsuario\Desktop\anki_automacao
    ```
@@ -955,13 +947,13 @@ Copie suas 10 palavras com suas 5 frases cada no formato mostrado acima.
 2. **Clique em "PROCESSAR"**
 
 3. **Para cada palavra:**
-   - Leia a explicaÃ§Ã£o e traduÃ§Ã£o
-   - Selecione 1 frase (clique no botÃ£o de rÃ¡dio)
-   - Ou use os botÃµes **"âœï¸ Editar"** ou **"ðŸ—‘ï¸ Excluir"** se precisar
+   - Leia a explicação e tradução
+   - Selecione 1 frase (clique no botão de rádio)
+   - Ou use os botões **"✏️ Editar"** ou **"🗑️ Excluir"** se precisar
 
 4. **Clique em "CRIAR CARDS"**
 
-5. **Aguarde** a criaÃ§Ã£o dos cards (alguns segundos)
+5. **Aguarde** a criação dos cards (alguns segundos)
 
 6. **Abra o ANKI** e veja os cards no deck "English"!
 
@@ -970,101 +962,101 @@ Copie suas 10 palavras com suas 5 frases cada no formato mostrado acima.
 ### Interface do Programa:
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                    ANKI CARD CREATOR                        â”‚
-â”‚              Seletor de Frases para Cards em Lote           â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Cole aqui a lista do dia:                                   â”‚
-â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
-â”‚ â”‚ ### **get down**                                         â”‚ â”‚
-â”‚ â”‚ **ExplicaÃ§Ã£o:** ...                                      â”‚ â”‚
-â”‚ â”‚ **PronÃºncia:** ...                                       â”‚ â”‚
-â”‚ â”‚ **TraduÃ§Ã£o:** ...                                        â”‚ â”‚
-â”‚ â”‚ | Frase em inglÃªs | TraduÃ§Ã£o em portuguÃªs |              â”‚ â”‚
-â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
-â”‚                                                              â”‚
-â”‚ [PROCESSAR] [LIMPAR]              Pronto. Cole a lista...    â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚           SELECIONE 1 FRASE PARA CADA PALAVRA:              â”‚
-â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
-â”‚ â”‚ 1. get down                              [Editar][Excluir]â”‚ â”‚
-â”‚ â”‚ EXPLICACAO: ...                                          â”‚ â”‚
-â”‚ â”‚ TRADUCAO: ...                                            â”‚ â”‚
-â”‚ â”‚ SELECIONE UMA FRASE:                                     â”‚ â”‚
-â”‚ â”‚ â—‹ Get down from that tree before you fall!               â”‚ â”‚
-â”‚ â”‚   â†’ Desce dessa Ã¡rvore antes que vocÃª caia!              â”‚ â”‚
-â”‚ â”‚ â—‹ The party was great; everyone was getting down...      â”‚ â”‚
-â”‚ â”‚   â†’ A festa foi Ã³tima; todo mundo estava danÃ§ando...     â”‚ â”‚
-â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
-â”‚                                                              â”‚
-â”‚                    [CRIAR CARDS]                            â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────────────────────────────┐
+│                    ANKI CARD CREATOR                        │
+│              Seletor de Frases para Cards em Lote           │
+├─────────────────────────────────────────────────────────────┤
+│ Cole aqui a lista do dia:                                   │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ ### **get down**                                         │ │
+│ │ **Explicação:** ...                                      │ │
+│ │ **Pronúncia:** ...                                       │ │
+│ │ **Tradução:** ...                                        │ │
+│ │ | Frase em inglês | Tradução em português |              │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                              │
+│ [PROCESSAR] [LIMPAR]              Pronto. Cole a lista...    │
+├─────────────────────────────────────────────────────────────┤
+│           SELECIONE 1 FRASE PARA CADA PALAVRA:              │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ 1. get down                              [Editar][Excluir]│ │
+│ │ EXPLICACAO: ...                                          │ │
+│ │ TRADUCAO: ...                                            │ │
+│ │ SELECIONE UMA FRASE:                                     │ │
+│ │ ○ Get down from that tree before you fall!               │ │
+│ │   → Desce dessa árvore antes que você caia!              │ │
+│ │ ○ The party was great; everyone was getting down...      │ │
+│ │   → A festa foi ótima; todo mundo estava dançando...     │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│                                                              │
+│                    [CRIAR CARDS]                            │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 8. SoluÃ§Ã£o de Problemas
+## 8. Solução de Problemas
 
-### Problema 1: `'python' nÃ£o Ã© reconhecido`
+### Problema 1: `'python' não é reconhecido`
 
-**SoluÃ§Ã£o:**
+**Solução:**
 - Reinstale o Python e **MARQUE** "Add Python to PATH"
 - Ou use o comando `py` em vez de `python`
 
 ### Problema 2: `ModuleNotFoundError: No module named 'requests'`
 
-**SoluÃ§Ã£o:**
+**Solução:**
 ```bash
 pip install requests gtts
 ```
 
-### Problema 3: O programa nÃ£o reconhece minhas frases
+### Problema 3: O programa não reconhece minhas frases
 
-**SoluÃ§Ã£o:**
+**Solução:**
 - Verifique se usou `### **palavra**` (3 # e palavra em negrito)
 - Verifique se a tabela usa `|` como separador
-- Verifique se nÃ£o hÃ¡ espaÃ§os extras
+- Verifique se não há espaços extras
 
-### Problema 4: Anki Connect nÃ£o responde
+### Problema 4: Anki Connect não responde
 
-**SoluÃ§Ã£o:**
-- Verifique se o ANKI estÃ¡ **ABERTO**
-- Verifique se o complemento Anki Connect estÃ¡ instalado
+**Solução:**
+- Verifique se o ANKI está **ABERTO**
+- Verifique se o complemento Anki Connect está instalado
 - Teste no navegador: `http://localhost:8765`
 
-### Problema 5: Ãudio nÃ£o funciona
+### Problema 5: Áudio não funciona
 
-**SoluÃ§Ã£o:**
-- O Ã¡udio Ã© gerado automaticamente, mas leva alguns segundos
+**Solução:**
+- O áudio é gerado automaticamente, mas leva alguns segundos
 - Verifique a pasta `collection.media` do ANKI
-- O Ã¡udio aparecerÃ¡ como um Ã­cone de alto-falante no card
+- O áudio aparecerá como um ícone de alto-falante no card
 
-### Problema 6: O programa estÃ¡ lento
+### Problema 6: O programa está lento
 
-**SoluÃ§Ã£o:**
+**Solução:**
 - Fechar outros programas
 - Criar menos cards por vez (ex: 5 em vez de 10)
 
 ---
 
-## âœ… Checklist de VerificaÃ§Ã£o
+## ✅ Checklist de Verificação
 
-Antes de comeÃ§ar, verifique:
+Antes de começar, verifique:
 
 | Etapa | Status |
 |-------|--------|
-| Python instalado (`python --version`) | â˜ |
-| Anki Connect instalado | â˜ |
-| Bibliotecas instaladas (`pip install requests gtts`) | â˜ |
-| Script salvo como `anki_gui.py` | â˜ |
-| Lista no formato correto (com `### **palavra**`) | â˜ |
-| ANKI aberto | â˜ |
+| Python instalado (`python --version`) | ☐ |
+| Anki Connect instalado | ☐ |
+| Bibliotecas instaladas (`pip install requests gtts`) | ☐ |
+| Script salvo como `anki_gui.py` | ☐ |
+| Lista no formato correto (com `### **palavra**`) | ☐ |
+| ANKI aberto | ☐ |
 
 ---
 
-## ðŸŽ¯ Resumo do Fluxo DiÃ¡rio
+## 🎯 Resumo do Fluxo Diário
 
-Quando vocÃª tiver suas 10 palavras com 5 frases cada:
+Quando você tiver suas 10 palavras com 5 frases cada:
 
 1. **Copiar** a lista formatada
 2. **Executar** `python anki_gui.py`
@@ -1074,20 +1066,20 @@ Quando vocÃª tiver suas 10 palavras com 5 frases cada:
 6. **Clicar** em "CRIAR CARDS"
 7. **Pronto!** Cards no ANKI em segundos
 
-Perfeito! Vou adicionar este prompt no tutorial. Ele Ã© essencial pois Ã© o que vocÃª usa para gerar as listas no DeepSeek.
+Perfeito! Vou adicionar este prompt no tutorial. Ele é essencial pois é o que você usa para gerar as listas no DeepSeek.
 
 ---
 
-## ðŸ“ AdiÃ§Ã£o ao Tutorial: Como Gerar as Listas de Frases
+## 📝 Adição ao Tutorial: Como Gerar as Listas de Frases
 
 ### Usando o DeepSeek para criar suas 10 palavras e 50 frases
 
-Antes de usar o programa, vocÃª precisa ter sua lista de palavras com 5 frases cada. VocÃª pode usar o **DeepSeek** (ou qualquer outro assistente de IA) para gerar essa lista automaticamente.
+Antes de usar o programa, você precisa ter sua lista de palavras com 5 frases cada. Você pode usar o **DeepSeek** (ou qualquer outro assistente de IA) para gerar essa lista automaticamente.
 
 ### Prompt para copiar e colar no DeepSeek:
 
 ```
-Aja como um especialista em TraduÃ§Ã£o e Ensino de Idiomas para alunos de nÃ­vel prÃ©-intermediÃ¡rio que preferem um estilo descontraÃ­do e informal. Sua tarefa Ã© fornecer as informaÃ§Ãµes para cada palavra da lista a seguir, seguindo estas etapas:
+Aja como um especialista em Tradução e Ensino de Idiomas para alunos de nível pré-intermediário que preferem um estilo descontraído e informal. Sua tarefa é fornecer as informações para cada palavra da lista a seguir, seguindo estas etapas:
 
 Lista do dia:
 
@@ -1104,14 +1096,14 @@ threats
 motion
 clockwise
 
-InstruÃ§Ãµes:
+Instruções:
 Para cada palavra, siga as etapas detalhadas abaixo:
-ExplicaÃ§Ã£o: DÃª uma explicaÃ§Ã£o de 3 a 5 linhas sobre a traduÃ§Ã£o de inglÃªs para portuguÃªs. As explicaÃ§Ãµes devem ser descontraÃ­das, como se estivesse explicando para um amigo.
-PronÃºncia: ForneÃ§a a palavra destacada em negrito com sua pronÃºncia fonÃ©tica padrÃ£o em inglÃªs (IPA), seguida de uma pronÃºncia fonÃ©tica "amigÃ¡vel" (mais fÃ¡cil de ler para brasileiros), aproximando-se do portuguÃªs, mantenha tudo em letra minuscula.
-TraduÃ§Ã£o: ForneÃ§a a traduÃ§Ã£o da palavra de inglÃªs para portuguÃªs, use como referÃªncia o site Reverso https://www.reverso.net/tradu%C3%A7%C3%A3o-texto 
-Exemplos de frases: ForneÃ§a 5 exemplos de frases em inglÃªs, relacionadas ao cotidiano, que tenham entre 70 e 100 caracteres. As frases devem destacar a palavra em negrito.
-TraduÃ§Ã£o das frases: Traduza as 5 frases de inglÃªs para o portuguÃªs, em um estilo informal, destacando a palavra principal em negrito.
-Formato esperado: As frases e suas traduÃ§Ãµes devem vir em formato de tabela, com a frase em inglÃªs na primeira coluna e a traduÃ§Ã£o em portuguÃªs na segunda coluna.
+Explicação: Dê uma explicação de 3 a 5 linhas sobre a tradução de inglês para português. As explicações devem ser descontraídas, como se estivesse explicando para um amigo.
+Pronúncia: Forneça a palavra destacada em negrito com sua pronúncia fonética padrão em inglês (IPA), seguida de uma pronúncia fonética "amigável" (mais fácil de ler para brasileiros), aproximando-se do português, mantenha tudo em letra minuscula.
+Tradução: Forneça a tradução da palavra de inglês para português, use como referência o site Reverso https://www.reverso.net/tradu%C3%A7%C3%A3o-texto 
+Exemplos de frases: Forneça 5 exemplos de frases em inglês, relacionadas ao cotidiano, que tenham entre 70 e 100 caracteres. As frases devem destacar a palavra em negrito.
+Tradução das frases: Traduza as 5 frases de inglês para o português, em um estilo informal, destacando a palavra principal em negrito.
+Formato esperado: As frases e suas traduções devem vir em formato de tabela, com a frase em inglês na primeira coluna e a tradução em português na segunda coluna.
 ```
 
 ### Como usar o prompt:
@@ -1132,41 +1124,41 @@ Formato esperado: As frases e suas traduÃ§Ãµes devem vir em formato de tabel
 
 ```markdown
 ### **dating**
-**ExplicaÃ§Ã£o:** "Dating" Ã© aquele perÃ­odo legal onde vocÃª sai com alguÃ©m, troca ideias, vai ao cinema, toma um cafÃ©, mas ainda sem compromisso sÃ©rio. Ã‰ tipo um "test drive" pra ver se rola quÃ­mica.
-**PronÃºncia:** /ËˆdeÉªtÉªÅ‹/ | dÃ©i-tin
-**TraduÃ§Ã£o:** namorando / saindo
+**Explicação:** "Dating" é aquele período legal onde você sai com alguém, troca ideias, vai ao cinema, toma um café, mas ainda sem compromisso sério. É tipo um "test drive" pra ver se rola química.
+**Pronúncia:** /ˈdeɪtɪŋ/ | déi-tin
+**Tradução:** namorando / saindo
 
-| **Frase em inglÃªs** | **TraduÃ§Ã£o em portuguÃªs** |
+| **Frase em inglês** | **Tradução em português** |
 |---------------------|---------------------------|
-| I've been **dating** her for two months now. | TÃ´ **saindo** com ela faz dois meses. |
-| Are you **dating** anyone at the moment? | CÃª tÃ¡ **namorando** alguÃ©m no momento? |
+| I've been **dating** her for two months now. | Tô **saindo** com ela faz dois meses. |
+| Are you **dating** anyone at the moment? | Cê tá **namorando** alguém no momento? |
 | We went **dating** in the park last Sunday. | A gente foi **sair** no parque domingo passado. |
-| Online **dating** can be tricky sometimes. | **Namoro** online pode ser complicado Ã s vezes. |
-| She's **dating** a guy from her work. | Ela tÃ¡ **saindo** com um cara do trabalho dela. |
+| Online **dating** can be tricky sometimes. | **Namoro** online pode ser complicado às vezes. |
+| She's **dating** a guy from her work. | Ela tá **saindo** com um cara do trabalho dela. |
 
 ### **went down**
-**ExplicaÃ§Ã£o:** "Went down" Ã© o passado de "go down", e pode significar vÃ¡rias coisas: aconteceu (um evento), caiu (um preÃ§o), desceu (fisicamente), ou atÃ© piorou a situaÃ§Ã£o. Ã‰ super versÃ¡til!
-**PronÃºncia:** /wÉ›nt daÊŠn/ | uÃ©nt dÃ¡un
-**TraduÃ§Ã£o:** aconteceu / caiu / desceu
+**Explicação:** "Went down" é o passado de "go down", e pode significar várias coisas: aconteceu (um evento), caiu (um preço), desceu (fisicamente), ou até piorou a situação. É super versátil!
+**Pronúncia:** /wɛnt daʊn/ | uént dáun
+**Tradução:** aconteceu / caiu / desceu
 
-| **Frase em inglÃªs** | **TraduÃ§Ã£o em portuguÃªs** |
+| **Frase em inglês** | **Tradução em português** |
 |---------------------|---------------------------|
-| I don't know what **went down** at the party. | NÃ£o sei o que **rolou** na festa. |
-| The price of gas **went down** again. | O preÃ§o da gasolina **caiu** de novo. |
-| He **went down** the stairs quickly. | Ele **desceu** as escadas rapidÃ£o. |
-| The whole situation **went down** badly. | A situaÃ§Ã£o toda **desandou** feio. |
-| The sun **went down** behind the mountains. | O sol **se pÃ´s** atrÃ¡s das montanhas. |
+| I don't know what **went down** at the party. | Não sei o que **rolou** na festa. |
+| The price of gas **went down** again. | O preço da gasolina **caiu** de novo. |
+| He **went down** the stairs quickly. | Ele **desceu** as escadas rapidão. |
+| The whole situation **went down** badly. | A situação toda **desandou** feio. |
+| The sun **went down** behind the mountains. | O sol **se pôs** atrás das montanhas. |
 ```
 
 ### Dica importante:
 
-- VocÃª pode **substituir as palavras** da lista "Lista do dia" pelas suas prÃ³prias palavras
-- Mantenha o formato `### **palavra**` e a tabela com `|` porque Ã© assim que o programa reconhece os dados
-- Sempre verifique se a resposta do DeepSeek estÃ¡ completa (10 palavras, cada uma com 5 frases)
+- Você pode **substituir as palavras** da lista "Lista do dia" pelas suas próprias palavras
+- Mantenha o formato `### **palavra**` e a tabela com `|` porque é assim que o programa reconhece os dados
+- Sempre verifique se a resposta do DeepSeek está completa (10 palavras, cada uma com 5 frases)
 
 ---
 
-## ðŸŽ¯ Fluxo Completo (Resumo)
+## 🎯 Fluxo Completo (Resumo)
 
 | Etapa | O que fazer |
 |-------|-------------|
@@ -1177,19 +1169,18 @@ Formato esperado: As frases e suas traduÃ§Ãµes devem vir em formato de tabel
 | 5 | Clique em "PROCESSAR" |
 | 6 | Selecione 1 frase por palavra |
 | 7 | Clique em "CRIAR CARDS" |
-| 8 | Pronto! Cards no ANKI ðŸš€ |
+| 8 | Pronto! Cards no ANKI 🚀 |
 
 ---
 
-## ðŸ“Œ ObservaÃ§Ãµes Finais
+## 📌 Observações Finais
 
-- O programa sÃ³ funciona corretamente se o formato da saÃ­da do DeepSeek seguir o padrÃ£o mostrado
-- Se as palavras ou frases vierem em um formato diferente, vocÃª pode editar manualmente antes de processar
-- O botÃ£o **"âœï¸ Editar"** permite corrigir qualquer informaÃ§Ã£o individualmente
-- O botÃ£o **"ðŸ—‘ï¸ Excluir"** remove palavras que vocÃª nÃ£o quer adicionar
+- O programa só funciona corretamente se o formato da saída do DeepSeek seguir o padrão mostrado
+- Se as palavras ou frases vierem em um formato diferente, você pode editar manualmente antes de processar
+- O botão **"✏️ Editar"** permite corrigir qualquer informação individualmente
+- O botão **"🗑️ Excluir"** remove palavras que você não quer adicionar
 
 ---
 
-Este tutorial agora estÃ¡ completo com todas as etapas! ðŸŽ‰
-
+Este tutorial agora está completo com todas as etapas! 🎉
 
