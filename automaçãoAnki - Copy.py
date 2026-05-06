@@ -1,0 +1,694 @@
+import tkinter as tk
+from tkinter import ttk, scrolledtext, messagebox, simpledialog, Toplevel
+import re
+import requests
+import os
+import tempfile
+import shutil
+import time
+from gtts import gTTS
+
+# Cores
+COLORS = {
+    'bg': '#f5f7fa',
+    'primary': '#5a67d8',
+    'primary_light': '#7f8cfa',
+    'secondary': '#718096',
+    'success': '#48bb78',
+    'success_light': '#a8e6cf',  # Verde claro
+    'warning': '#ed8936',
+    'danger': '#f56565',
+    'danger_light': '#fed7d7',   # Vermelho claro para texto
+    'light': '#ffffff',
+    'light_gray': '#f7fafc',
+    'dark': '#2d3748',
+    'border': '#e2e8f0',
+    'card_bg': '#ffffff',
+    'header_bg': '#edf2f7'
+}
+
+class AnkiApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Anki Card Creator - Seletor de Frases")
+        self.root.configure(bg=COLORS['bg'])
+        self.root.state('zoomed')
+        
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
+        
+        self.dados = []
+        self.selecoes = {}
+        
+        self.setup_ui()
+        self._setup_mousewheel()
+        
+    def _setup_mousewheel(self):
+        def _on_mousewheel(event):
+            self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        self.root.bind_all("<MouseWheel>", _on_mousewheel)
+        
+    def setup_ui(self):
+        main_frame = tk.Frame(self.root, bg=COLORS['bg'])
+        main_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=15)
+        main_frame.grid_rowconfigure(3, weight=1)
+        main_frame.grid_columnconfigure(0, weight=1)
+        
+        # Titulo
+        title_frame = tk.Frame(main_frame, bg=COLORS['primary'], height=70)
+        title_frame.grid(row=0, column=0, sticky="ew", pady=(0, 15))
+        title_frame.grid_propagate(False)
+        
+        title_label = tk.Label(title_frame, text="ANKI CARD CREATOR", 
+                               font=("Segoe UI", 18, "bold"), 
+                               bg=COLORS['primary'], 
+                               fg=COLORS['light'])
+        title_label.pack(expand=True)
+        
+        subtitle = tk.Label(title_frame, text="Seletor de Frases para Cards em Lote",
+                           font=("Segoe UI", 9),
+                           bg=COLORS['primary'],
+                           fg=COLORS['light_gray'])
+        subtitle.pack()
+        
+        # Input
+        input_frame = tk.Frame(main_frame, bg=COLORS['light'], relief=tk.GROOVE, bd=1)
+        input_frame.grid(row=1, column=0, sticky="ew", pady=(0, 15))
+        
+        tk.Label(input_frame, text="Cole aqui a lista do dia:", 
+                font=("Segoe UI", 10, "bold"),
+                bg=COLORS['light'],
+                fg=COLORS['dark']).pack(anchor=tk.W, padx=15, pady=(10, 5))
+        
+        self.texto_input = scrolledtext.ScrolledText(input_frame, height=6, 
+                                                      font=("Consolas", 9),
+                                                      wrap=tk.WORD,
+                                                      bg=COLORS['light_gray'])
+        self.texto_input.pack(fill=tk.X, padx=15, pady=(0, 10))
+        
+        # Botoes superiores - REDUZIDOS
+        btn_frame = tk.Frame(main_frame, bg=COLORS['bg'])
+        btn_frame.grid(row=2, column=0, sticky="ew", pady=(0, 15))
+        
+        self.btn_processar = tk.Button(btn_frame, 
+                                       text="PROCESSAR", 
+                                       bg=COLORS['primary'],
+                                       fg=COLORS['light'],
+                                       font=("Segoe UI", 10, "bold"),
+                                       padx=15, pady=5,
+                                       cursor="hand2",
+                                       relief=tk.RAISED,
+                                       command=self.processar_lista)
+        self.btn_processar.pack(side=tk.LEFT, padx=5)
+        
+        self.btn_limpar = tk.Button(btn_frame, 
+                                    text="LIMPAR", 
+                                    bg=COLORS['secondary'],
+                                    fg=COLORS['light'],
+                                    font=("Segoe UI", 9),
+                                    padx=12, pady=5,
+                                    cursor="hand2",
+                                    relief=tk.RAISED,
+                                    command=self.limpar_tudo)
+        self.btn_limpar.pack(side=tk.LEFT, padx=5)
+        
+        self.status_label = tk.Label(btn_frame, 
+                                     text="Pronto. Cole a lista e clique em Processar.",
+                                     bg=COLORS['bg'],
+                                     fg=COLORS['success'],
+                                     font=("Segoe UI", 9))
+        self.status_label.pack(side=tk.RIGHT, padx=10)
+        
+        # Area de selecao - ALTURA AUMENTADA
+        palavras_frame = tk.Frame(main_frame, bg=COLORS['light'], relief=tk.GROOVE, bd=1)
+        palavras_frame.grid(row=3, column=0, sticky="nsew", pady=(0, 10))
+        palavras_frame.grid_rowconfigure(1, weight=1)
+        palavras_frame.grid_columnconfigure(0, weight=1)
+        
+        header_frame = tk.Frame(palavras_frame, bg=COLORS['primary_light'], height=40)
+        header_frame.grid(row=0, column=0, sticky="ew", padx=1, pady=1)
+        header_frame.grid_propagate(False)
+        
+        tk.Label(header_frame, text="SELECIONE 1 FRASE PARA CADA PALAVRA:",
+                font=("Segoe UI", 11, "bold"),
+                bg=COLORS['primary_light'],
+                fg=COLORS['light']).pack(anchor=tk.W, padx=15, pady=10)
+        
+        canvas_container = tk.Frame(palavras_frame, bg=COLORS['light'])
+        canvas_container.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
+        canvas_container.grid_rowconfigure(0, weight=1)
+        canvas_container.grid_columnconfigure(0, weight=1)
+        
+        self.canvas = tk.Canvas(canvas_container, bg=COLORS['light_gray'], highlightthickness=0)
+        self.scrollbar = ttk.Scrollbar(canvas_container, orient="vertical", command=self.canvas.yview)
+        self.scrollable_frame = tk.Frame(self.canvas, bg=COLORS['light_gray'])
+        
+        self.scrollable_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
+        
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw", width=self.canvas.winfo_width())
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+        
+        self.canvas.grid(row=0, column=0, sticky="nsew")
+        self.scrollbar.grid(row=0, column=1, sticky="ns")
+        
+        def _configure_canvas(event):
+            self.canvas.itemconfig(1, width=event.width)
+        self.canvas.bind("<Configure>", _configure_canvas)
+        
+        # Botao criar cards - METADE DO TAMANHO, VERDE CLARO FUNDO, TEXTO VERMELHO
+        bottom_frame = tk.Frame(main_frame, bg=COLORS['bg'])
+        bottom_frame.grid(row=4, column=0, sticky="ew", pady=8)
+        
+        self.btn_criar = tk.Button(bottom_frame,
+                                   text="CRIAR CARDS",
+                                   bg=COLORS['success_light'],
+                                   fg=COLORS['danger'],
+                                   font=("Segoe UI", 12, "bold"),
+                                   padx=25, pady=8,
+                                   cursor="hand2",
+                                   relief=tk.RAISED,
+                                   state="disabled",
+                                   command=self.criar_cards)
+        self.btn_criar.pack(pady=5)
+        
+        self.progress = ttk.Progressbar(bottom_frame, mode='indeterminate', length=300)
+    
+    def extrair_dados(self, texto):
+        dados = []
+        linhas = texto.split('\n')
+        i = 0
+        
+        while i < len(linhas):
+            linha = linhas[i].strip()
+            
+            # Uma palavra começa com ### ou **palavra** (sem dois pontos no final para não confundir com metadados)
+            if linha.startswith('###') or (linha.startswith('**') and ':' not in linha and len(linha) > 4):
+                palavra_match = re.search(r'\*\*([^*]+)\*\*|^###\s*(?:\d+\.\s*)?(.+)', linha)
+                if palavra_match:
+                    palavra = (palavra_match.group(1) or palavra_match.group(2)).strip()
+                    palavra = re.sub(r'^\d+\.\s*', '', palavra)
+                    i += 1
+                    
+                    explicacao = ""
+                    pronuncia = ""
+                    traducao = ""
+                    frases = []
+                    
+                    # Captura metadados e frases até a próxima palavra ou fim do texto
+                    while i < len(linhas):
+                        sub_linha = linhas[i].strip()
+                        
+                        # Se encontrar o início de outra palavra, interrompe a busca para este bloco
+                        if sub_linha.startswith('###') or (sub_linha.startswith('**') and ':' not in sub_linha and len(sub_linha) > 4):
+                            break
+                        
+                        # Captura metadados
+                        if 'Explicação:' in sub_linha:
+                            explicacao = sub_linha.split('Explicação:')[1].replace('**', '').strip()
+                        elif 'Pronúncia:' in sub_linha:
+                            pronuncia = sub_linha.split('Pronúncia:')[1].replace('**', '').strip()
+                        elif 'Tradução:' in sub_linha:
+                            traducao = sub_linha.split('Tradução:')[1].replace('**', '').strip()
+                        
+                        # Captura frases da tabela
+                        if '|' in sub_linha and not any(x in sub_linha for x in ['English Sentence', '---', '|--', 'Frase em inglês']):
+                            partes = sub_linha.split('|')
+                            if len(partes) >= 3:
+                                frase_en = partes[1].replace('**', '').strip()
+                                frase_pt = partes[2].replace('**', '').strip()
+                                if frase_en and frase_pt:
+                                    frases.append({'en': frase_en, 'pt': frase_pt})
+                        
+                        i += 1
+                    
+                    if palavra and frases:
+                        dados.append({
+                            'palavra': palavra,
+                            'explicacao': explicacao,
+                            'pronuncia': pronuncia,
+                            'traducao': traducao,
+                            'frases': frases
+                        })
+                else:
+                    i += 1
+            else:
+                i += 1
+        
+        return dados
+    
+    def excluir_palavra(self, index):
+        """Remove uma palavra e suas frases da lista"""
+        if messagebox.askyesno("Confirmar Exclusão", f"Deseja excluir a palavra '{self.dados[index]['palavra']}' e todas as suas frases?"):
+            self.dados.pop(index)
+            # Reorganizar selecoes
+            novas_selecoes = {}
+            for i, var in enumerate(self.selecoes.values()):
+                if i < index:
+                    novas_selecoes[i] = var
+                elif i > index:
+                    novas_selecoes[i-1] = var
+            self.selecoes = novas_selecoes
+            self.mostrar_opcoes()
+            self.status_label.config(text=f"Palavra excluída. Restam {len(self.dados)} palavras.", fg=COLORS['warning'])
+    
+    def editar_palavra(self, index):
+        """Abre janela para editar palavra, explicacao, pronuncia, traducao e frases"""
+        item = self.dados[index]
+        
+        # Criar janela de edicao
+        edit_window = Toplevel(self.root)
+        edit_window.title(f"Editando: {item['palavra']}")
+        edit_window.geometry("800x700")
+        edit_window.configure(bg=COLORS['bg'])
+        
+        # Frame com scroll
+        canvas = tk.Canvas(edit_window, bg=COLORS['bg'], highlightthickness=0)
+        scrollbar = ttk.Scrollbar(edit_window, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas, bg=COLORS['bg'])
+        
+        scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        row = 0
+        
+        # Palavra
+        tk.Label(scrollable_frame, text="Palavra:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        palavra_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
+        palavra_entry.insert(0, item['palavra'])
+        palavra_entry.grid(row=row, column=1, padx=10, pady=5)
+        row += 1
+        
+        # Explicacao
+        tk.Label(scrollable_frame, text="Explicação:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.NW, padx=10, pady=5)
+        explicacao_text = tk.Text(scrollable_frame, font=("Segoe UI", 10), width=60, height=4, wrap=tk.WORD)
+        explicacao_text.insert("1.0", item['explicacao'])
+        explicacao_text.grid(row=row, column=1, padx=10, pady=5)
+        row += 1
+        
+        # Pronuncia
+        tk.Label(scrollable_frame, text="Pronúncia:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        pronuncia_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
+        pronuncia_entry.insert(0, item['pronuncia'])
+        pronuncia_entry.grid(row=row, column=1, padx=10, pady=5)
+        row += 1
+        
+        # Traducao
+        tk.Label(scrollable_frame, text="Tradução:", font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, sticky=tk.W, padx=10, pady=5)
+        traducao_entry = tk.Entry(scrollable_frame, font=("Segoe UI", 11), width=50)
+        traducao_entry.insert(0, item['traducao'])
+        traducao_entry.grid(row=row, column=1, padx=10, pady=5)
+        row += 1
+        
+        # Frases
+        tk.Label(scrollable_frame, text="Frases (uma por linha, formato: frase em inglês | tradução):", 
+                font=("Segoe UI", 10, "bold"), bg=COLORS['bg']).grid(row=row, column=0, columnspan=2, sticky=tk.W, padx=10, pady=5)
+        row += 1
+        
+        frases_text = tk.Text(scrollable_frame, font=("Consolas", 10), width=70, height=10, wrap=tk.WORD)
+        frases_content = "\n".join([f"{f['en']} | {f['pt']}" for f in item['frases']])
+        frases_text.insert("1.0", frases_content)
+        frases_text.grid(row=row, column=0, columnspan=2, padx=10, pady=5)
+        row += 1
+        
+        # Botoes
+        btn_frame = tk.Frame(scrollable_frame, bg=COLORS['bg'])
+        btn_frame.grid(row=row, column=0, columnspan=2, pady=15)
+        
+        def salvar_edicao():
+            nova_palavra = palavra_entry.get().strip()
+            nova_explicacao = explicacao_text.get("1.0", tk.END).strip()
+            nova_pronuncia = pronuncia_entry.get().strip()
+            nova_traducao = traducao_entry.get().strip()
+            
+            # Processar frases
+            novas_frases = []
+            for linha in frases_text.get("1.0", tk.END).strip().split('\n'):
+                if '|' in linha:
+                    partes = linha.split('|')
+                    if len(partes) >= 2:
+                        en = partes[0].strip()
+                        pt = partes[1].strip()
+                        if en and pt:
+                            novas_frases.append({'en': en, 'pt': pt})
+            
+            if not nova_palavra:
+                messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
+                return
+            
+            if not novas_frases:
+                messagebox.showwarning("Aviso", "Pelo menos uma frase é obrigatória!")
+                return
+            
+            # Atualizar dados
+            self.dados[index] = {
+                'palavra': nova_palavra,
+                'explicacao': nova_explicacao,
+                'pronuncia': nova_pronuncia,
+                'traducao': nova_traducao,
+                'frases': novas_frases
+            }
+            
+            # Atualizar selecao
+            var = tk.IntVar()
+            var.set(0)
+            self.selecoes[index] = var
+            
+            edit_window.destroy()
+            self.mostrar_opcoes()
+            self.status_label.config(text=f"Palavra '{nova_palavra}' editada com sucesso!", fg=COLORS['success'])
+        
+        tk.Button(btn_frame, text="Salvar", bg=COLORS['success'], fg='white', 
+                 font=("Segoe UI", 11, "bold"), padx=20, pady=5,
+                 command=salvar_edicao).pack(side=tk.LEFT, padx=10)
+        
+        tk.Button(btn_frame, text="Cancelar", bg=COLORS['secondary'], fg='white',
+                 font=("Segoe UI", 11), padx=20, pady=5,
+                 command=edit_window.destroy).pack(side=tk.LEFT, padx=10)
+    
+    def processar_lista(self):
+        texto = self.texto_input.get("1.0", tk.END)
+        
+        if not texto.strip():
+            messagebox.showwarning("Aviso", "Cole a lista do dia antes de processar!")
+            return
+        
+        self.status_label.config(text="Processando lista...", fg=COLORS['warning'])
+        self.root.update()
+        
+        self.dados = self.extrair_dados(texto)
+        
+        if not self.dados:
+            messagebox.showerror("Erro", "Nenhum dado encontrado! Verifique o formato da lista.")
+            self.status_label.config(text="Erro: formato invalido", fg=COLORS['danger'])
+            return
+        
+        self.selecoes = {}
+        self.mostrar_opcoes()
+        self.btn_criar.config(state="normal")
+        self.status_label.config(text=f"{len(self.dados)} palavras encontradas. Selecione 1 frase para cada.", fg=COLORS['success'])
+    
+    def mostrar_opcoes(self):
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+        
+        for i, item in enumerate(self.dados):
+            # Card principal
+            card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
+            card.pack(fill=tk.X, pady=8, padx=5)
+            
+            # Cabeçalho com botoes de acao
+            header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
+            header.pack(fill=tk.X)
+            header.pack_propagate(False)
+            
+            # Titulo a esquerda
+            palavra_label = tk.Label(header, 
+                                     text=item['palavra'].title(), 
+                                     font=("Segoe UI", 14, "bold"),
+                                     bg=COLORS['header_bg'],
+                                     fg=COLORS['primary'])
+            palavra_label.pack(side=tk.LEFT, padx=15, pady=10)
+            
+            # Botoes de editar e excluir a direita
+            btn_excluir = tk.Button(header, 
+                                    text="🗑️ Excluir", 
+                                    bg=COLORS['danger'],
+                                    fg='white',
+                                    font=("Segoe UI", 9),
+                                    padx=8, pady=2,
+                                    cursor="hand2",
+                                    command=lambda idx=i: self.excluir_palavra(idx))
+            btn_excluir.pack(side=tk.RIGHT, padx=5)
+            
+            btn_editar = tk.Button(header, 
+                                   text="✏️ Editar", 
+                                   bg=COLORS['warning'],
+                                   fg='white',
+                                   font=("Segoe UI", 9),
+                                   padx=8, pady=2,
+                                   cursor="hand2",
+                                   command=lambda idx=i: self.editar_palavra(idx))
+            btn_editar.pack(side=tk.RIGHT, padx=5)
+            
+            # Informacoes
+            info_frame = tk.Frame(card, bg=COLORS['card_bg'])
+            info_frame.pack(fill=tk.X, padx=15, pady=10)
+            
+            if item['explicacao'].strip():
+                tk.Label(info_frame, 
+                        text="EXPLICAÇÃO:",
+                        bg=COLORS['card_bg'],
+                        fg=COLORS['secondary'],
+                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
+                
+                explicacao_label = tk.Label(info_frame,
+                                            text=item['explicacao'][:150] + "..." if len(item['explicacao']) > 150 else item['explicacao'],
+                                            bg=COLORS['light_gray'],
+                                            fg=COLORS['dark'],
+                                            font=("Segoe UI", 9),
+                                            wraplength=1000,
+                                            justify=tk.LEFT,
+                                            padx=8,
+                                            pady=5,
+                                            relief=tk.FLAT)
+                explicacao_label.pack(fill=tk.X, pady=(0, 8))
+            
+            if item['traducao'].strip():
+                tk.Label(info_frame,
+                        text=f"{item['palavra'].upper()}:",
+                        bg=COLORS['card_bg'],
+                        fg=COLORS['secondary'],
+                        font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
+                
+                traducao_label = tk.Label(info_frame,
+                                          text=item['traducao'],
+                                          bg=COLORS['light_gray'],
+                                          fg=COLORS['dark'],
+                                          font=("Segoe UI", 9),
+                                          wraplength=1000,
+                                          justify=tk.LEFT,
+                                          padx=8,
+                                          pady=5,
+                                          relief=tk.FLAT)
+                traducao_label.pack(fill=tk.X, pady=(0, 8))
+            
+            tk.Label(info_frame,
+                    text="SELECIONE UMA FRASE:",
+                    bg=COLORS['card_bg'],
+                    fg=COLORS['success'],
+                    font=("Segoe UI", 10, "bold")).pack(anchor=tk.W, pady=(8, 5))
+            
+            var = tk.IntVar()
+            self.selecoes[i] = var
+            
+            for j, frase in enumerate(item['frases']):
+                frase_frame = tk.Frame(card, bg=COLORS['light_gray'] if j % 2 == 0 else COLORS['card_bg'])
+                frase_frame.pack(fill=tk.X, padx=15, pady=3)
+                
+                rb = tk.Radiobutton(frase_frame, 
+                                    variable=var, 
+                                    value=j,
+                                    bg=frase_frame.cget('bg'),
+                                    activebackground=frase_frame.cget('bg'),
+                                    cursor="hand2",
+                                    font=("Segoe UI", 10))
+                rb.pack(side=tk.LEFT, padx=8)
+                
+                frase_text = tk.Label(frase_frame,
+                                      text=frase['en'],
+                                      bg=frase_frame.cget('bg'),
+                                      fg=COLORS['dark'],
+                                      wraplength=900,
+                                      justify=tk.LEFT,
+                                      font=("Segoe UI", 10))
+                frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
+                
+                traducao_frase = tk.Label(frase_frame,
+                                         text=f"→ {frase['pt']}",
+                                         bg=frase_frame.cget('bg'),
+                                         fg=COLORS['secondary'],
+                                         wraplength=900,
+                                         justify=tk.LEFT,
+                                         font=("Segoe UI", 9))
+                traducao_frase.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=2)
+            
+            if item['frases']:
+                var.set(0)
+        
+        self.scrollable_frame.update_idletasks()
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+    
+    def limpar_tudo(self):
+        self.texto_input.delete("1.0", tk.END)
+        self.dados = []
+        self.selecoes = {}
+        self.btn_criar.config(state="disabled")
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+        self.status_label.config(text="Pronto. Cole a lista e clique em Processar.", fg=COLORS['success'])
+    
+    def gerar_audio(self, texto, palavra):
+        try:
+            nome_limpo = re.sub(r'[\\/*?:"<>|]', "", palavra)
+            timestamp = int(time.time() * 1000)
+            nome_arquivo = f"google-{timestamp}-{nome_limpo}.mp3"
+            
+            tts = gTTS(texto, lang='en', slow=False)
+            
+            temp_dir = tempfile.gettempdir()
+            temp_path = os.path.join(temp_dir, nome_arquivo)
+            tts.save(temp_path)
+            
+            import glob
+            possiveis_caminhos = [
+                os.path.expanduser("~/AppData/Roaming/Anki2/*/collection.media"),
+            ]
+            media_path = None
+            for caminho in possiveis_caminhos:
+                matches = glob.glob(caminho)
+                if matches:
+                    media_path = matches[0]
+                    break
+            
+            if media_path:
+                destino = os.path.join(media_path, nome_arquivo)
+                shutil.copy2(temp_path, destino)
+                os.remove(temp_path)
+                return f"[sound:{nome_arquivo}]"
+            else:
+                os.remove(temp_path)
+                return ""
+        except Exception as e:
+            return ""
+    
+    def obter_modelo(self):
+        try:
+            resp = requests.post("http://localhost:8765", json={"action": "modelNames", "version": 6}, timeout=5)
+            modelos = resp.json().get("result", [])
+            
+            for modelo in modelos:
+                resp = requests.post("http://localhost:8765", json={"action": "modelFieldNames", "version": 6, "params": {"modelName": modelo}}, timeout=5)
+                campos = resp.json().get("result", [])
+                if "Frente" in campos and "Verso" in campos:
+                    return modelo
+            return None
+        except:
+            return None
+    
+    def criar_card(self, frase_ingles, palavra, explicacao, pronuncia, traducao):
+        modelo = self.obter_modelo()
+        if not modelo:
+            return False, "Modelo nao encontrado"
+        
+        audio_tag = self.gerar_audio(frase_ingles, palavra)
+        
+        frase_destacada = re.sub(rf'\b({re.escape(palavra)})\b', r'**\1**', frase_ingles, flags=re.IGNORECASE)
+        frente = f"{frase_destacada} {audio_tag}" if audio_tag else frase_destacada
+        
+        verso = f"""{palavra}
+Explicação: {explicacao}
+Pronúncia: {pronuncia}
+Tradução: {traducao}"""
+        
+        note = {
+            "deckName": "English",
+            "modelName": modelo,
+            "fields": {
+                "Frente": frente,
+                "Verso": verso
+            },
+            "tags": ["automacao"],
+            "options": {"allowDuplicate": False}
+        }
+        
+        payload = {"action": "addNote", "version": 6, "params": {"note": note}}
+        
+        try:
+            response = requests.post("http://localhost:8765", json=payload, timeout=30)
+            result = response.json()
+            if result.get("error"):
+                return False, result["error"]
+            return True, "OK"
+        except Exception as e:
+            return False, str(e)
+    
+    def criar_cards(self):
+        if not self.dados:
+            messagebox.showwarning("Aviso", "Nenhuma palavra para processar!")
+            return
+        
+        for i, item in enumerate(self.dados):
+            var = self.selecoes.get(i)
+            if var is None or var.get() is None:
+                messagebox.showwarning("Aviso", f"Selecione uma frase para a palavra: {item['palavra']}")
+                return
+        
+        try:
+            test = requests.post("http://localhost:8765", json={"action": "version", "version": 6}, timeout=3)
+            if test.status_code != 200:
+                messagebox.showerror("Erro", "Anki Connect nao responde. Certifique-se que o Anki esta aberto.")
+                return
+        except:
+            messagebox.showerror("Erro", "Nao foi possivel conectar ao Anki. Verifique se o Anki esta aberto.")
+            return
+        
+        self.btn_criar.config(state="disabled")
+        self.btn_processar.config(state="disabled")
+        self.progress.pack(pady=5)
+        self.progress.start()
+        
+        self.status_label.config(text="Criando cards... (pode levar alguns segundos)", fg=COLORS['warning'])
+        self.root.update()
+        
+        sucessos = 0
+        erros = []
+        
+        for i, item in enumerate(self.dados):
+            frase_idx = self.selecoes[i].get()
+            frase = item['frases'][frase_idx]
+            
+            self.status_label.config(text=f"Criando card {i+1}/{len(self.dados)}: {item['palavra']}...", fg=COLORS['warning'])
+            self.root.update()
+            
+            sucesso, msg = self.criar_card(
+                frase['en'],
+                item['palavra'],
+                item['explicacao'],
+                item['pronuncia'],
+                item['traducao']
+            )
+            
+            if sucesso:
+                sucessos += 1
+            else:
+                erros.append(f"{item['palavra']}: {msg}")
+        
+        self.progress.stop()
+        self.progress.pack_forget()
+        
+        self.btn_criar.config(state="normal")
+        self.btn_processar.config(state="normal")
+        
+        if erros:
+            messagebox.showwarning("Concluido com Erros", 
+                f"{sucessos}/{len(self.dados)} cards criados.\n\nErros:\n" + "\n".join(erros))
+            self.status_label.config(text=f"{sucessos}/{len(self.dados)} cards criados com erros", fg=COLORS['warning'])
+        else:
+            messagebox.showinfo("Sucesso", f"Todos os {sucessos} cards foram criados com sucesso!")
+            self.status_label.config(text=f"{sucessos}/{len(self.dados)} cards criados com sucesso!", fg=COLORS['success'])
+        
+        if messagebox.askyesno("Limpar", "Deseja limpar a lista para comecar uma nova?"):
+            self.limpar_tudo()
+
+def main():
+    root = tk.Tk()
+    app = AnkiApp(root)
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
