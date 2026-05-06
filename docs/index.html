@@ -148,7 +148,6 @@ COLORS = {
     'success_light': '#a8e6cf',
     'warning': '#ed8936',
     'danger': '#f56565',
-    'danger_light': '#fed7d7',
     'light': '#ffffff',
     'light_gray': '#f7fafc',
     'dark': '#2d3748',
@@ -314,7 +313,7 @@ class AnkiApp:
             if linha.startswith('###') or (linha.startswith('**') and not linha.startswith('**Explicação')):
                 palavra_match = re.search(r'\*\*([^*]+)\*\*', linha)
                 if palavra_match:
-                    palavra = palavra_match.group(1).strip()
+                    palavra = palavra_match.group(1).strip().lower()
                     i += 1
                     
                     while i &lt; len(linhas) and not linhas[i].strip():
@@ -360,7 +359,13 @@ class AnkiApp:
                                 frase_pt = re.sub(r'\*\*([^*]+)\*\*', r'\1', frase_pt)
                                 
                                 if frase_en and frase_pt:
-                                    frases.append({'en': frase_en, 'pt': frase_pt})
+                                    # Destacar a palavra na frase
+                                    frase_destacada = re.sub(rf'\b({re.escape(palavra)})\b', r'**\1**', frase_en, flags=re.IGNORECASE)
+                                    frases.append({
+                                        'en': frase_en, 
+                                        'pt': frase_pt,
+                                        'en_destacada': frase_destacada
+                                    })
                         
                         i += 1
                     
@@ -452,7 +457,7 @@ class AnkiApp:
         btn_frame.grid(row=row, column=0, columnspan=2, pady=15)
         
         def salvar_edicao():
-            nova_palavra = palavra_entry.get().strip()
+            nova_palavra = palavra_entry.get().strip().lower()
             nova_explicacao = explicacao_text.get("1.0", tk.END).strip()
             nova_pronuncia = pronuncia_entry.get().strip()
             nova_traducao = traducao_entry.get().strip()
@@ -465,7 +470,12 @@ class AnkiApp:
                         en = partes[0].strip()
                         pt = partes[1].strip()
                         if en and pt:
-                            novas_frases.append({'en': en, 'pt': pt})
+                            frase_destacada = re.sub(rf'\b({re.escape(nova_palavra)})\b', r'**\1**', en, flags=re.IGNORECASE)
+                            novas_frases.append({
+                                'en': en,
+                                'pt': pt,
+                                'en_destacada': frase_destacada
+                            })
             
             if not nova_palavra:
                 messagebox.showwarning("Aviso", "A palavra não pode estar vazia!")
@@ -522,13 +532,16 @@ class AnkiApp:
         self.status_label.config(text=f"{len(self.dados)} palavras encontradas. Selecione 1 frase para cada.", fg=COLORS['success'])
     
     def mostrar_opcoes(self):
+        """Exibe apenas a palavra e as frases com destaque"""
         for widget in self.scrollable_frame.winfo_children():
             widget.destroy()
         
         for i, item in enumerate(self.dados):
+            # Card principal
             card = tk.Frame(self.scrollable_frame, bg=COLORS['card_bg'], relief=tk.RAISED, bd=1)
             card.pack(fill=tk.X, pady=8, padx=5)
             
+            # Cabeçalho com a palavra e botoes
             header = tk.Frame(card, bg=COLORS['header_bg'], height=45)
             header.pack(fill=tk.X)
             header.pack_propagate(False)
@@ -560,50 +573,15 @@ class AnkiApp:
                                    command=lambda idx=i: self.editar_palavra(idx))
             btn_editar.pack(side=tk.RIGHT, padx=5)
             
-            info_frame = tk.Frame(card, bg=COLORS['card_bg'])
-            info_frame.pack(fill=tk.X, padx=15, pady=10)
+            # Frases
+            frases_frame = tk.Frame(card, bg=COLORS['card_bg'])
+            frases_frame.pack(fill=tk.X, padx=15, pady=10)
             
-            tk.Label(info_frame, 
-                    text="EXPLICACAO:",
-                    bg=COLORS['card_bg'],
-                    fg=COLORS['secondary'],
-                    font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
-            
-            explicacao_label = tk.Label(info_frame,
-                                         text=item['explicacao'][:150] + "..." if len(item['explicacao']) &gt; 150 else item['explicacao'],
-                                         bg=COLORS['light_gray'],
-                                         fg=COLORS['dark'],
-                                         font=("Segoe UI", 9),
-                                         wraplength=1000,
-                                         justify=tk.LEFT,
-                                         padx=8,
-                                         pady=5,
-                                         relief=tk.FLAT)
-            explicacao_label.pack(fill=tk.X, pady=(0, 8))
-            
-            tk.Label(info_frame,
-                    text="TRADUCAO:",
-                    bg=COLORS['card_bg'],
-                    fg=COLORS['secondary'],
-                    font=("Segoe UI", 9, "bold")).pack(anchor=tk.W, pady=(2, 0))
-            
-            traducao_label = tk.Label(info_frame,
-                                       text=item['traducao'],
-                                       bg=COLORS['light_gray'],
-                                       fg=COLORS['dark'],
-                                       font=("Segoe UI", 9),
-                                       wraplength=1000,
-                                       justify=tk.LEFT,
-                                       padx=8,
-                                       pady=5,
-                                       relief=tk.FLAT)
-            traducao_label.pack(fill=tk.X, pady=(0, 8))
-            
-            tk.Label(info_frame,
+            tk.Label(frases_frame,
                     text="SELECIONE UMA FRASE:",
                     bg=COLORS['card_bg'],
                     fg=COLORS['success'],
-                    font=("Segoe UI", 10, "bold")).pack(anchor=tk.W, pady=(8, 5))
+                    font=("Segoe UI", 10, "bold")).pack(anchor=tk.W, pady=(0, 8))
             
             var = tk.IntVar()
             self.selecoes[i] = var
@@ -613,31 +591,61 @@ class AnkiApp:
                 frase_frame.pack(fill=tk.X, padx=15, pady=3)
                 
                 rb = tk.Radiobutton(frase_frame, 
-                                     variable=var, 
-                                     value=j,
-                                     bg=frase_frame.cget('bg'),
-                                     activebackground=frase_frame.cget('bg'),
-                                     cursor="hand2",
-                                     font=("Segoe UI", 10))
+                                    variable=var, 
+                                    value=j,
+                                    bg=frase_frame.cget('bg'),
+                                    activebackground=frase_frame.cget('bg'),
+                                    cursor="hand2",
+                                    font=("Segoe UI", 10))
                 rb.pack(side=tk.LEFT, padx=8)
                 
-                frase_text = tk.Label(frase_frame,
-                                       text=frase['en'],
+                # Criar um Text widget para mostrar a frase com a palavra em negrito
+                frase_widget = tk.Text(frase_frame, 
                                        bg=frase_frame.cget('bg'),
-                                       fg=COLORS['dark'],
-                                       wraplength=900,
-                                       justify=tk.LEFT,
-                                       font=("Segoe UI", 10))
-                frase_text.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5)
+                                       font=("Segoe UI", 10),
+                                       wrap=tk.WORD,
+                                       height=2,
+                                       borderwidth=0,
+                                       highlightthickness=0,
+                                       padx=5,
+                                       pady=5)
                 
+                # Configurar tags para negrito
+                frase_widget.tag_configure("bold", font=("Segoe UI", 10, "bold"), foreground=COLORS['primary'])
+                frase_widget.tag_configure("normal", font=("Segoe UI", 10))
+                
+                # Usar a versão com destaque
+                texto_frase = frase.get('en_destacada', frase['en'])
+                
+                # Processar o texto para encontrar partes entre ** **
+                pos = 0
+                while True:
+                    match = re.search(r'\*\*([^*]+)\*\*', texto_frase)
+                    if not match:
+                        if pos &lt; len(texto_frase):
+                            frase_widget.insert(tk.END, texto_frase[pos:], "normal")
+                        break
+                    
+                    # Texto antes do negrito
+                    if match.start() &gt; pos:
+                        frase_widget.insert(tk.END, texto_frase[pos:match.start()], "normal")
+                    
+                    # Texto em negrito
+                    frase_widget.insert(tk.END, match.group(1), "bold")
+                    pos = match.end()
+                
+                frase_widget.config(state="disabled")
+                frase_widget.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=5, padx=(0, 10))
+                
+                # Traducao da frase
                 traducao_frase = tk.Label(frase_frame,
-                                          text=f"→ {frase['pt']}",
-                                          bg=frase_frame.cget('bg'),
-                                          fg=COLORS['secondary'],
-                                          wraplength=900,
-                                          justify=tk.LEFT,
-                                          font=("Segoe UI", 9))
-                traducao_frase.pack(side=tk.LEFT, fill=tk.X, expand=True, pady=2)
+                                         text=f"→ {frase['pt']}",
+                                         bg=frase_frame.cget('bg'),
+                                         fg=COLORS['secondary'],
+                                         wraplength=300,
+                                         justify=tk.LEFT,
+                                         font=("Segoe UI", 9))
+                traducao_frase.pack(side=tk.RIGHT, padx=5, pady=5)
             
             if item['frases']:
                 var.set(0)
@@ -799,7 +807,7 @@ Tradução: {traducao}"""
         if erros:
             messagebox.showwarning("Concluido com Erros", 
                 f"{sucessos}/{len(self.dados)} cards criados.\n\nErros:\n" + "\n".join(erros))
-            self.status_label.config(text=f"{sucessos}/{len(self.dados)} cards criados with erros", fg=COLORS['warning'])
+            self.status_label.config(text=f"{sucessos}/{len(self.dados)} cards criados com erros", fg=COLORS['warning'])
         else:
             messagebox.showinfo("Sucesso", f"Todos os {sucessos} cards foram criados com sucesso!")
             self.status_label.config(text=f"{sucessos}/{len(self.dados)} cards criados com sucesso!", fg=COLORS['success'])
